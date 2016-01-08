@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  include ./layout/nav.jade
+  p List all properties
+
+  ul
+  - each property in properties 
+    li
+      a(href="/properties/#{property._id}/") #{property.name} 
+include ./layout/footer.jade

@@ -1,5 +1,28 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .homepage__jumbotron
+    include ./layout/nav.jade
+    .container
+      h1.homepage__header Guiding you to good & affordable homes in Davao
+      p.homepage__sub-header Discover where to live in Davao. By locals, for everyone.
+
+  div.container.homepage__properties
+    h2.homepage__properties--header Explore properties in your area
+    div.homepage__properties__container.col-sm-4
+      div.homepage__properties--image
+        img.img-responsive(src="../images/location-property-matina.jpg")
+        p.homepage__properties--name Matina 
+        a.homepage__properties--count(href="/areas/matina") 25 properties
+    div.col-sm-4
+      div.homepage__properties--image
+        img.img-responsive(src="../images/location-property-roxas.jpg")
+        p.homepage__properties--name Bangkal 
+        a.homepage__properties--count(href="/areas/bangkal") #{prop.length} properties
+    div.col-sm-4
+      div.homepage__properties--image
+        img.img-responsive(src="../images/location-property-matina.jpg")
+        p.homepage__properties--name Ulas 
+        a.homepage__properties--count(href="/areas/ulas") 25 properties
+    a.btn.btn-primary(href="/") See All Properties
+include ./layout/footer.jade

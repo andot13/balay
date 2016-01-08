@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  include ./layout/nav.jade
+  h2 Login to your account
+  div.container
+    form.form-horizontal(method='post' action="/login")
+      div.form-group
+        label(for="username") Username:
+        input(type="text", name="username", required=true)
+      div.form-group
+        label(for="password") Password:
+        input(type="password", name="password", required=true)
+      input(type="submit")
+include ./layout/footer.jade

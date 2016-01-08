@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  include ./layout/nav.jade
+
+  - if (area)
+    p show single area
+  
+  - if (areas)
+    p List all areas 
+    ul
+    - each area in areas 
+      li
+        a(href="/areas/#{area._id}/") #{area.name} 
+include ./layout/footer.jade

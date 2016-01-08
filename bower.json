@@ -1,0 +1,23 @@
+{
+  "name": "balay",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Andy Aparece <andy.aparece@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/andot13/balay",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0"
+  }
+}

@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  include ./layout/nav.jade
+  .container
+    div.col-sm-9
+      div.col-sm-2
+        img.img-responsive(src="/images/homepage-background.jpg")
+      div.col-sm-8
+        h2 #{singleProperty.name} 
+        p NHA Bangkal Davao City
+    div.col-sm-3
+      p Lorem doloribus modi facilis qui.
+  .container
+    h2 Nearby Properties
+    - each property in properties 
+      div.property__card.col-sm-4
+        div.property__image-container
+          a.property__love(href="#") 
+            span.is-loved__count 88
+            i.fa.fa-heart-o
+          a(href="/properties/#{property._id}")
+            img.img-responsive(src="/images/homepage-background.jpg")
+          div.property__title
+            span #{property.name}
+          div.property__price
+            span P882342
+          div.property__location
+            i.property__location-icon.fa.fa-map-marker
+            span.property__location-loc Phase 3 Blk 5 Lot 4 Bangkal
+        div.property__header
+          img.property__author--image.img-circle(src="/images/location-property-matina.jpg")
+        div.col-sm-3
+          span #{property.bedroom} 
+          i.flaticon-furniture117
+        div.col-sm-3
+          span #{property.shower} 
+          i.flaticon-showers7
+        div.col-sm-4
+          span #{property.shower} 
+          i.flaticon-home180
+include ./layout/footer.jade
