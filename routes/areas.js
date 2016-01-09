@@ -15,25 +15,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/:area_id', function(req, res, next) {
-  var areaId = req.params.area_id;
-
-  area = Areas.findOne(areaId, function(error, data){
-    if (error)
-      res.send(error);
-    
-    propertyIds = area.map(function(prop) {
-      return prop.id;
-    });
-
-    areaProperties = Properties.find({
-      _id: { $in: propertyIds }
-    }).toArray();
-  });
- });
-
-
-
 //   var areaId = req.params.area_id;
 //   Areas.findOne(areaId, function(error, data){
 //     if (error)

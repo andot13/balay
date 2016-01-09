@@ -1,21 +1,21 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var flash = require('connect-flash');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
+var express          = require('express');
+var path             = require('path');
+var favicon          = require('serve-favicon');
+var logger           = require('morgan');
+var flash            = require('connect-flash');
+var cookieParser     = require('cookie-parser');
+var bodyParser       = require('body-parser');
+var session          = require('express-session');
 var expressValidator = require('express-validator');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
-var config = require('./config');
+var mongoose         = require('mongoose');
+var passport         = require('passport');
+var localStrategy    = require('passport-local').Strategy;
+var config           = require('./config');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routes     = require('./routes/index');
+var users      = require('./routes/users');
 var properties = require('./routes/properties');
-var areas = require('./routes/areas');
+var areas      = require('./routes/areas');
 
 var app = express();
 

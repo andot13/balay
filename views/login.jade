@@ -3,6 +3,7 @@ extends layout
 block content
   include ./layout/nav.jade
   h2 Login to your account
+  != messages()
   div.container
     form.form-horizontal(method='post' action="/login")
       div.form-group

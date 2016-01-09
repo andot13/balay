@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
 var passport = require('passport');
 var Properties = require('../models/Property');
 var User  = require('../models/User');
+var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -23,57 +23,122 @@ router.get('/signup', function(req, res) {
   });
 });
 
+
 router.post('/signup', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  var confirmPassword = req.body.confirm-password;
+  var user = {
+    username: req.body.username,
+    password: req.body.password
+  };
 
-  //Form validation
-  req.checkBody('username', 'username is required').notEmpty();
-  req.checkBody('password', 'password is required').notEmpty();
-  req.checkBody('confirm-password', 'Passwords do not match').equals(req.body.password);
-
-  var errors = req.validationErrors();
-
-  if(errors){
-    res.render('signup', {
-      errors: errors,
-      username: username,
-      password: password
-    });
-  } else {
-
-    // Create a new user
-    User.register(new User({ username: username}), password, function(error, user){
-      if (error) {
-        req.flash('info', 'Username is already taken');
-        return res.render('signup', {
-        });
-      }
-
-      passport.authenticate('local')(req, res, function(){
-        req.flash('success', 'You are now registered');
-        res.redirect('/dashboard');
+  User.register(new User(user), user.password, function(err, account) {
+    if (err) {
+      req.flash('info', 'Username already taken');
+      return res.render('signup', {
+        user: account
       });
+    }
+
+    passport.authenticate('local')(req, res, function () {
+      req.flash('info', 'Welcome');
+      res.redirect('/dashboard');
     });
-  }
+  });
 });
 
+
+// router.post('/signup', function(req, res) {
+//   // var username = req.body.username;
+//   // var password = req.body.password;
+//   // var confirmPassword = req.body.confirm-password;
+//   //
+//   // //Form validation
+//   // req.checkBody('username', 'username is required').notEmpty();
+//   // req.checkBody('password', 'password is required').notEmpty();
+//   // req.checkBody('confirm-password', 'Passwords do not match').equals(req.body.password);
+//   //
+//   // var errors = req.validationErrors();
+//   //
+//   // if(errors){
+//   //   res.render('signup', {
+//   //     errors: errors,
+//   //     username: username,
+//   //     password: password
+//   //   });
+//   // }
+//
+//   User.register(new User({ username : req.body.username }), req.body.password, function(err, account) {
+//     if (err) {
+//       return res.render('signup', { account : account });
+//     }
+//
+//     res.redirect('/dashboard');
+//     // passport.authenticate('local')(req, res, function () {
+//     //   res.redirect('/dashboard');
+//     // });
+//   });
+//
+// });
+
 router.get('/login', function(req, res){
+  if (req.isAuthenticated()){
+    res.redirect('/dashboard');
+  }
+
   res.render('login', {
     title: 'Login'
   });
 });
 
 
-router.get('/logout', function(req, res) {
-  res.redirect('/');
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { 
+      return next(err); 
+    }
+    if (!user) { 
+      req.flash('error', 'User not found');
+      return res.redirect('/login'); 
+    }
+    
+    // Everything ok
+    req.logIn(user, function(err) {
+      if (err) { 
+        return next(err); 
+      }
+      req.flash('info', 'Login successful!');
+      return res.redirect('/dashboard');
+    });
+  })(req, res, next);
 });
 
-router.get('/dashboard', function(req, res) {
+router.get('/logout', function(req, res) {
+  if(req.isAuthenticated()){
+    req.logout();
+    req.flash('info', 'You are now logged out');
+  }
+
+  res.redirect('/login');
+});
+
+router.get('/dashboard', isLoggedIn ,function(req, res) {
+  
+  // Disable back button
+  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
+
   res.render('dashboard', {
     title: 'Dashboard'
   });
 });
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  // if user is authenticated in the session, carry on 
+  if (req.isAuthenticated())
+    return next();
+
+  // if they aren't redirect them to the home page
+  res.redirect('/');
+}
 
 module.exports = router;
