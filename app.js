@@ -85,13 +85,13 @@ app.use('/areas', areas);
 
 var User = require('./models/User');
 passport.use(new localStrategy(User.authenticate()));
+
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
 mongoose.connect(config.database.uri);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

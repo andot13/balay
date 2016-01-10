@@ -18,6 +18,10 @@ router.get('/', function(req, res) {
 });
 
 router.get('/signup', function(req, res) {
+  if (req.isAuthenticated()){
+    res.redirect('/dashboard');
+  }
+
   res.render('signup', {
     title: 'Signup'
   });
@@ -30,6 +34,7 @@ router.post('/signup', function(req, res) {
     password: req.body.password
   };
 
+
   User.register(new User(user), user.password, function(err, account) {
     if (err) {
       req.flash('info', 'Username already taken');
@@ -39,7 +44,6 @@ router.post('/signup', function(req, res) {
     }
 
     passport.authenticate('local')(req, res, function () {
-      req.flash('info', 'Welcome');
       res.redirect('/dashboard');
     });
   });
@@ -89,27 +93,13 @@ router.get('/login', function(req, res){
   });
 });
 
+router.post('/login', passport.authenticate('local', { 
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+    failureFlash: true 
+  })
+);
 
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { 
-      return next(err); 
-    }
-    if (!user) { 
-      req.flash('error', 'User not found');
-      return res.redirect('/login'); 
-    }
-    
-    // Everything ok
-    req.logIn(user, function(err) {
-      if (err) { 
-        return next(err); 
-      }
-      req.flash('info', 'Login successful!');
-      return res.redirect('/dashboard');
-    });
-  })(req, res, next);
-});
 
 router.get('/logout', function(req, res) {
   if(req.isAuthenticated()){
