@@ -28,26 +28,11 @@ router.get('/signup', function(req, res) {
 });
 
 
-router.post('/signup', function(req, res) {
-  var user = {
-    username: req.body.username,
-    password: req.body.password
-  };
-
-
-  User.register(new User(user), user.password, function(err, account) {
-    if (err) {
-      req.flash('info', 'Username already taken');
-      return res.render('signup', {
-        user: account
-      });
-    }
-
-    passport.authenticate('local')(req, res, function () {
-      res.redirect('/dashboard');
-    });
-  });
-});
+router.post('/signup', passport.authenticate('local-signup', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/signup',
+  failureFlash: true
+}));
 
 
 // router.post('/signup', function(req, res) {
@@ -93,7 +78,7 @@ router.get('/login', function(req, res){
   });
 });
 
-router.post('/login', passport.authenticate('local', { 
+router.post('/login', passport.authenticate('local-login', { 
     successRedirect: '/dashboard',
     failureRedirect: '/login',
     failureFlash: true 
