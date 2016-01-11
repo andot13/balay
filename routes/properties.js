@@ -8,10 +8,17 @@ router.get('/', function(req, res, next) {
       res.send(error);
     res.render('properties', { 
       properties: data,
-      title: 'Express'
+      title: 'express'
     });
   });
 });
+
+// router.get('/new', function(req, res, next) {
+//     res.render('dashboard', { 
+//       title: 'express'
+//     });
+// });
+
 
 
 router.get('/:property_id', function(req, res, next) {
@@ -35,5 +42,6 @@ router.get('/:property_id', function(req, res, next) {
     });
   });
 });
+
 
 module.exports = router;

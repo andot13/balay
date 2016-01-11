@@ -4,12 +4,14 @@ block content
   include ./layout/nav.jade
 
   - if (area)
-    p show single area
-  
+    h2 #{area.name}
+
+    p TODO: Show all properties in #{area.name}
+    
   - if (areas)
     p List all areas 
     ul
     - each area in areas 
       li
-        a(href="/areas/#{area._id}/") #{area.name} 
+        a(href="/areas/#{area._id}/") #{area.name} - #{area.properties.length} properties 
 include ./layout/footer.jade

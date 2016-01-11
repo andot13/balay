@@ -15,15 +15,16 @@ router.get('/', function(req, res, next) {
 });
 
 
-//   var areaId = req.params.area_id;
-//   Areas.findOne(areaId, function(error, data){
-//     if (error)
-//       res.send(error);
-//     res.render('areas', { 
-//       area: data,
-//       title: 'Express'
-//     });
-//   });
-// });
+router.get('/:area_id', function(req, res, next) {
+  var areaId = req.params.area_id;
+  Areas.findOne({ _id: areaId }, function(error, data){
+    if (error)
+      res.send(error);
+    res.render('areas', { 
+      area: data,
+      title: 'Express'
+    });
+  });
+});
 
 module.exports = router;

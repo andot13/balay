@@ -8,6 +8,7 @@ var bodyParser       = require('body-parser');
 var session          = require('express-session');
 var expressValidator = require('express-validator');
 var mongoose         = require('mongoose');
+var multer           = require('multer');
 var passport         = require('passport');
 var localStrategy    = require('passport-local').Strategy;
 var config           = require('./config');
@@ -19,9 +20,16 @@ var areas      = require('./routes/areas');
 
 var app = express();
 
+//Format date with moment
+app.locals.moment = require('moment');
+
+// Multer config
+var upload = multer({ dest: 'uploads/' });
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
