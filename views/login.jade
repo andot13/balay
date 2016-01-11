@@ -7,11 +7,13 @@ block content
   div.container
     form.form-horizontal(method='post' action="/login")
       div.form-group
-        label(for="username") Username:
-        input(type="text", name="username", required=true)
+        label(for="email") Email:
+        input(type="text", name="email", required=true)
       div.form-group
         label(for="password") Password:
         input(type="password", name="password", required=true)
+      div.form-group
+        input(type="submit")
   p Don't have an account? 
     a(href="/signup") Sign up now
 include ./layout/footer.jade
