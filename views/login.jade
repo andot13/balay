@@ -5,13 +5,17 @@ block content
   h2 Login to your account
   != messages()
   div.container
+    if errors
+      ul
+      each error, i in errors
+        li.alert.alert-danger #{error.msg}
     form.form-horizontal(method='post' action="/login")
       div.form-group
         label(for="email") Email:
-        input(type="text", name="email", required=true)
+        input(type="text", name="email", value="#{ user? user : '' }" novalidate)
       div.form-group
         label(for="password") Password:
-        input(type="password", name="password", required=true)
+        input(type="password", name="password", novalidate)
       div.form-group
         input(type="submit")
   p Don't have an account? 

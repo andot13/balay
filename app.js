@@ -66,6 +66,7 @@ app.use(expressValidator({
   }
 }));
 
+
 //Flash
 app.use(flash());
 app.use(function (req, res, next) {
@@ -80,6 +81,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);

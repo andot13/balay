@@ -28,45 +28,43 @@ router.get('/signup', function(req, res) {
 });
 
 
-router.post('/signup', passport.authenticate('local-signup', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/signup',
-  failureFlash: true
-}));
+// router.post('/signup', passport.authenticate('local-signup', {
+//   successRedirect: '/dashboard',
+//   failureRedirect: '/signup',
+//   failureFlash: true
+// }));
 
 
-// router.post('/signup', function(req, res) {
-//   // var username = req.body.username;
-//   // var password = req.body.password;
-//   // var confirmPassword = req.body.confirm-password;
-//   //
-//   // //Form validation
-//   // req.checkBody('username', 'username is required').notEmpty();
-//   // req.checkBody('password', 'password is required').notEmpty();
-//   // req.checkBody('confirm-password', 'Passwords do not match').equals(req.body.password);
-//   //
-//   // var errors = req.validationErrors();
-//   //
-//   // if(errors){
-//   //   res.render('signup', {
-//   //     errors: errors,
-//   //     username: username,
-//   //     password: password
-//   //   });
-//   // }
-//
-//   User.register(new User({ username : req.body.username }), req.body.password, function(err, account) {
-//     if (err) {
-//       return res.render('signup', { account : account });
-//     }
-//
-//     res.redirect('/dashboard');
-//     // passport.authenticate('local')(req, res, function () {
-//     //   res.redirect('/dashboard');
-//     // });
-//   });
-//
-// });
+router.post('/signup', function(req, res) {
+  var email = req.body.email;
+  var password = req.body.password;
+  // var confirmPassword = req.body.confirm-password;
+  //
+  // //Form validation
+  req.checkBody('email', 'email is required').notEmpty();
+  req.checkBody('email', 'valid email required').isEmail();
+  req.checkBody('password', 'password is required').notEmpty();
+  req.checkBody('password', '6 to 20 characters required').len(6, 20);
+  // req.checkBody('confirm-password', 'Passwords do not match').equals(req.body.password);
+  //
+  var errors = req.validationErrors();
+  //
+
+  if(errors){
+    res.render('signup', {
+      errors: errors,
+      email: email,
+    });
+  } else {
+    passport.authenticate('local-signup', {
+      successRedirect: '/dashboard',
+      failureRedirect: '/signup',
+      failureFlash: true
+    })(req, res);
+  }
+
+
+});
 
 router.get('/login', function(req, res){
   if (req.isAuthenticated()){
@@ -78,12 +76,32 @@ router.get('/login', function(req, res){
   });
 });
 
-router.post('/login', passport.authenticate('local-login', { 
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-    failureFlash: true 
-  })
-);
+router.post('/login', function(req, res){
+  var email = req.body.email;
+  var password = req.body.password;
+  // var confirmPassword = req.body.confirm-password;
+  //
+  // //Form validation
+  req.checkBody('email', 'email is required').notEmpty();
+  req.checkBody('password', 'password is required').notEmpty();
+  // req.checkBody('confirm-password', 'Passwords do not match').equals(req.body.password);
+  //
+  var errors = req.validationErrors();
+  //
+
+  if(errors){
+    res.render('login', {
+      errors: errors,
+      email: email
+    });
+  } else {
+    passport.authenticate('local-login', {
+      successRedirect: '/dashboard',
+      failureRedirect: '/login',
+      failureFlash: true
+    })(req, res);
+  }
+});
 
 
 router.get('/logout', function(req, res) {
