@@ -1,8 +1,10 @@
 var express = require('express');
-var router = express.Router();
+var passport = require('passport');
 var Properties = require('../models/Property');
+var User  = require('../models/User');
+var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/',  function(req, res, next) {
   Properties.find(function(error, data){
     if (error)
       res.send(error);
@@ -13,18 +15,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// router.get('/new', function(req, res, next) {
-//     res.render('dashboard', { 
-//       title: 'express'
-//     });
-// });
-
 
 
 router.get('/:property_id', function(req, res, next) {
 
   var reqId = req.params.property_id;
-  var allProperties;
+  var relatedProperties;
 
   Properties.find(function(error, data){
     if (error)
@@ -36,11 +32,41 @@ router.get('/:property_id', function(req, res, next) {
     if (error)
       res.send(error);
     res.render('property', { 
-      singleProperty: data,
+      property: data,
       properties: relatedProperties,
       title: 'Express'
     });
   });
+});
+
+
+router.post('/:property_id/', function(req, res, next){
+  var postId = req.body.property_id;
+  var commentBody = req.body.comment_body;
+  var userId = req.body.user_id;
+
+  var comment = {
+    author: userId,
+    body: commentBody
+  }
+
+  Properties.findOneAndUpdate({
+      "_id": postId
+    },
+    {
+      $push: {
+        "comments": comment
+      }
+    },
+    {
+      upsert: true
+    },
+    function(error, data){
+      if (error)
+        res.send(error);
+      res.redirect('/properties/' + postId);
+    }
+  );
 });
 
 

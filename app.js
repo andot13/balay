@@ -13,12 +13,13 @@ var passport         = require('passport');
 var localStrategy    = require('passport-local').Strategy;
 var config           = require('./config');
 
+var app = express();
+
 var routes     = require('./routes/index');
 var users      = require('./routes/users');
 var properties = require('./routes/properties');
 var areas      = require('./routes/areas');
 
-var app = express();
 
 //Format date with moment
 app.locals.moment = require('moment');
@@ -56,6 +57,21 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
+
+app.get('*', function(req, res, next){
+  if (!req.user) {
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
+  }
+  next();
+});
+
+
 // Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -89,10 +105,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
-app.get('*', function(req, res, next){
-  res.locals.user = req.user || null;
-  next();
-});
 
 app.use('/', routes);
 app.use('/users', users);
@@ -100,6 +112,8 @@ app.use('/properties', properties);
 app.use('/areas', areas);
 
 var User = require('./models/User');
+
+
 
 // used to serialize the user for the session
 passport.serializeUser(function(user, done) {
@@ -188,6 +202,17 @@ function(req, email, password, done) { // callback with email and password from 
   });
 
 }));
+
+
+
+app.use(function(req, res, next) {
+  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
+  next();
+});
+
+
+
 
 
 

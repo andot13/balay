@@ -7,13 +7,30 @@ block content
       div.col-sm-2
         img.img-responsive(src="/images/homepage-background.jpg")
       div.col-sm-8
-        h2 #{singleProperty.name} 
-        p #{moment(singleProperty.created_at).startOf('day').fromNow()} 
+        h2 #{property.name} 
+        p #{moment(property.created_at).startOf('day').fromNow()} 
     div.col-sm-3
       p Lorem doloribus modi facilis qui.
   .container
+  if property.comments
+    h2 Comments
+    each comment, i in property.comments
+      p #{comment.body}
+        span by #{comment.author}
+    // If there is user, therefore user is logged in
+    if user 
+      h2 Add comment
+      form(method="post", action="/properties/" + property._id + "/")
+        input(name="user_id", type="hidden", value="#{user._id}")
+        input(name="property_id", type="hidden", value="#{property._id}")
+        .form-group
+          textarea(type="text", name="comment_body")
+        input(type="submit", value="Add Comment")
+    else
+      a(href="/login") Login to comment
+  .container
     h2 Nearby Properties
-    - each property in properties 
+    each property, i in properties 
       div.property__card.col-sm-4
         div.property__image-container
           a.property__love(href="#") 

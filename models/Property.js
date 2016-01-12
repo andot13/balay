@@ -10,8 +10,13 @@ var propertySchema = new Schema({
     default: Date.now
   },
   comments: [{
+    _id: Number, 
+    author: String,
     body: String,
-    date: Date
+    date: {
+      type: Date,
+      default: Date.now
+    } 
   }]
 });
 
