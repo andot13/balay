@@ -15,6 +15,7 @@ var config           = require('./config');
 
 var app = express();
 
+var api        = require('./routes/api');
 var routes     = require('./routes/index');
 var users      = require('./routes/users');
 var properties = require('./routes/properties');
@@ -39,8 +40,8 @@ if (app.get('env') === 'development') {
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 
@@ -106,7 +107,8 @@ app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 
-app.use('/', routes);
+app.use('/api', api);
+// app.use('/', routes);
 app.use('/users', users);
 app.use('/properties', properties);
 app.use('/areas', areas);
