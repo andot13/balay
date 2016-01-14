@@ -15,12 +15,6 @@ var config           = require('./config');
 
 var app = express();
 
-var api        = require('./routes/api');
-var routes     = require('./routes/index');
-var users      = require('./routes/users');
-var properties = require('./routes/properties');
-var areas      = require('./routes/areas');
-
 
 //Format date with moment
 app.locals.moment = require('moment');
@@ -106,11 +100,16 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
+var routes           = require('./routes/index');
+var users            = require('./routes/users');
+var propertiesRouter = require('./routes/properties');
+var apiProperties    = require('./routes/api/properties');
+var areas            = require('./routes/areas');
 
-app.use('/api', api);
-// app.use('/', routes);
+app.use('/', routes); // Public routes
+app.use('/api/properties', apiProperties); // Property Routes
 app.use('/users', users);
-app.use('/properties', properties);
+app.use('/properties', propertiesRouter);
 app.use('/areas', areas);
 
 var User = require('./models/User');
