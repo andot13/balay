@@ -30,19 +30,71 @@ router.route('/')
 
   });
 
+// Middleware to handle findById. id fetched from url
+router.use('/:propertyId', function(req, res, next){
+
+  Properties.findById(req.params.propertyId, function(err, property){
+    if (err) {
+      res.status(500).send(err);
+    } else if(property){
+      req.property = property;
+      next();
+    } else {
+      res.status(404).send('No property found');
+    }
+  });
+
+});
+
 router.route('/:propertyId')
   .get(function(req, res){
-    var propertyId = req.params.propertyId;
 
-    Properties.findById(propertyId, function(err, properties){
+    // If property is found, return json
+    res.json(req.property);
+
+  })
+  .put(function(req, res){
+    req.property.name    = req.body.name;
+    req.property.bedroom = req.body.bedroom;
+    req.property.shower  = req.body.shower;
+    req.property.area    = req.body.area;
+    req.property.comments = [];
+
+    req.property.save( function(err){
       if (err) {
         res.status(500).send(err);
       } else {
-        res.json(properties);
+        res.json(req.property);
+      }
+    });
+  })
+  .patch(function (req, res){
+
+    if( req.body._id) {
+      delete req.body._id;
+    }
+
+    for(var a in req.body){
+      req.property[a] = req.body[a];
+    }
+
+    req.property.save( function(err){
+      if (err){
+        res.status(500).send(err);
+      } else {
+        res.json(req.property);
+      }
+    });
+  })
+  .delete(function (req, res){
+    req.property.remove( function(err){
+      if (err){
+        res.status(500).send(err);
+      } else {
+        res.status(204).send('Removed');
       }
     });
   });
-
 
 
 module.exports = router;
