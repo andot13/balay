@@ -103,11 +103,14 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 var routes           = require('./routes/index');
 var users            = require('./routes/users');
 var propertiesRouter = require('./routes/properties');
-var apiProperties    = require('./routes/api/properties');
 var areas            = require('./routes/areas');
+
+var apiProperties    = require('./routes/api/properties');
+var apiUsers= require('./routes/api/users');
 
 app.use('/', routes); // Public routes
 app.use('/api/properties', apiProperties); // Property Routes
+app.use('/api/users', apiUsers);
 app.use('/users', users);
 app.use('/properties', propertiesRouter);
 app.use('/areas', areas);

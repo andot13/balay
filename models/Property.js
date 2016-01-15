@@ -5,6 +5,10 @@ var propertySchema = new Schema({
   name: String,
   bedroom: Number,
   shower: Number,
+  posted_by: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Users'
+  }],
   created_at: {
     type: Date, 
     default: Date.now
