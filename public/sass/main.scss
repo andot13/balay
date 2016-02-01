@@ -18,7 +18,7 @@ body {
 .navbar {
   padding-top: 1em;
   margin-bottom: 0;
-  background-color: #fff;
+  // background-color: #fff;
   background: transparent;
   border-color: transparent;
 
@@ -28,6 +28,11 @@ body {
       margin: 0 10px 0 0;
     }
   }
+}
+
+.navbar--account {
+  background: white;
+  padding-top: 0;
 }
 
 .navbar-right {
