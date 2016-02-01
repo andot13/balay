@@ -11,16 +11,22 @@ var mongoose         = require('mongoose');
 var multer           = require('multer');
 var passport         = require('passport');
 var localStrategy    = require('passport-local').Strategy;
+var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 var config           = require('./config');
 
 var app = express();
 
 
-//Format date with moment
-app.locals.moment = require('moment');
+passport.use(new GoogleStrategy({
+    clientID: '1071203922603-osb76t6lb92mb2fs1t68ug3iq34i5g0q.apps.googleusercontent.com',
+    clientSecret: 'jOgRuFfotdPqNsJ9vApYO4aM',
+    callbackURL: 'http://localhost:3000/auth/google/callback'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    done(null, profile);
+  }
+));
 
-// Multer config
-var upload = multer({ dest: 'uploads/' });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,23 +54,6 @@ app.use(session({
   resave: true
 }));
 
-// Passport 
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.get('*', function(req, res, next){
-  res.locals.user = req.user || null;
-  next();
-});
-
-app.get('*', function(req, res, next){
-  if (!req.user) {
-    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-    res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
-  }
-  next();
-});
 
 
 // Validator
@@ -93,17 +82,32 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 app.use(express.static(path.join(__dirname, '/public')));
 
 
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
+
+app.use(session({secret: 'andypogi', saveUninitialized: true, resave: false }));
+
+// Passport 
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done){
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done){
+  done(null, user);
+});
+
 var routes           = require('./routes/index');
 var users            = require('./routes/users');
 var propertiesRouter = require('./routes/properties');
 var areas            = require('./routes/areas');
+var auth             = require('./routes/auth');
 
 var apiProperties    = require('./routes/api/properties');
 var apiUsers= require('./routes/api/users');
@@ -114,112 +118,10 @@ app.use('/api/users', apiUsers);
 app.use('/users', users);
 app.use('/properties', propertiesRouter);
 app.use('/areas', areas);
+app.use('/auth', auth);
+
 
 var User = require('./models/User');
-
-
-
-// used to serialize the user for the session
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-// used to deserialize the user
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-passport.use('local-signup', new localStrategy({
-  // by default, local strategy uses username and password, we will override with email
-  usernameField : 'email',
-  passwordField : 'password',
-  passReqToCallback : true // allows us to pass back the entire request to the callback
-},
-function(req, email, password, done) {
-
-  // asynchronous
-  // User.findOne wont fire unless data is sent back
-  process.nextTick(function() {
-
-    // find a user whose email is the same as the forms email
-    // we are checking to see if the user trying to login already exists
-    User.findOne({ 'local.email': email}, function(err, user) {
-      // if there are any errors, return the error
-      if (err)
-        return done(err);
-
-      // check to see if theres already a user with that email
-      if (user) {
-        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-      } else {
-
-        // if there is no user with that email
-        // create the user
-        var newUser = new User();
-
-        // set the user's local credentials
-        newUser.local.email = email;
-        newUser.local.password = newUser.generateHash(password);
-
-        // save the user
-        newUser.save(function(err) {
-          if (err)
-            throw err;
-          return done(null, newUser);
-        });
-      }
-
-    });    
-
-  });
-
-}));
-
-
-passport.use('local-login', new localStrategy({
-  // by default, local strategy uses username and password, we will override with email
-  usernameField : 'email',
-  passwordField : 'password',
-  passReqToCallback : true // allows us to pass back the entire request to the callback
-},
-function(req, email, password, done) { // callback with email and password from our form
-
-  // find a user whose email is the same as the forms email
-  // we are checking to see if the user trying to login already exists
-  User.findOne({ 'local.email' :  email}, function(err, user) {
-    // if there are any errors, return the error before anything else
-    if (err)
-      return done(err);
-
-    // if no user is found, return the message
-    if (!user)
-      return done(null, false, req.flash('info', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
-
-    // if the user is found but the password is wrong
-    if (!user.validPassword(password))
-      return done(null, false, req.flash('info', 'Wrong password.')); // create the loginMessage and save it to session as flashdata
-
-    // all is well, return successful user
-    return done(null, user);
-  });
-
-}));
-
-
-
-app.use(function(req, res, next) {
-  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-  res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
-  next();
-});
-
-
-
-
-
-
 
 
 // catch 404 and forward to error handler

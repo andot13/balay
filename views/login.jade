@@ -5,6 +5,8 @@ block content
   h2 Login to your account
   != messages()
   div.container
+    a(href="/auth/google") Login with google
+  div.container
     if errors
       ul
       each error, i in errors

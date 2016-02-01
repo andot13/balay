@@ -57,18 +57,17 @@ router.post('/signup', function(req, res) {
     });
   } else {
     passport.authenticate('local-signup', {
-      successRedirect: '/dashboard',
+      successRedirect: '/account',
       failureRedirect: '/signup',
       failureFlash: true
-    })(req, res);
+    });
   }
-
 
 });
 
 router.get('/login', function(req, res){
   if (req.isAuthenticated()){
-    res.redirect('/dashboard');
+    res.redirect('/account');
   }
 
   res.render('login', {
@@ -96,7 +95,7 @@ router.post('/login', function(req, res){
     });
   } else {
     passport.authenticate('local-login', {
-      successRedirect: '/dashboard',
+      successRedirect: '/account',
       failureRedirect: '/login',
       failureFlash: true
     })(req, res);
@@ -113,13 +112,17 @@ router.get('/logout', function(req, res) {
   res.redirect('/login');
 });
 
-router.get('/dashboard', isLoggedIn ,function(req, res) {
+router.get('/account', isLoggedIn ,function(req, res) {
   // Disable back button
-  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-  res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
+  // res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  // res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
 
   res.render('dashboard', {
-    title: 'Dashboard'
+    title: 'Dashboard',
+    user: {
+      name: req.user.displayName,
+      image: req.user._json.image.url
+    }
   });
 });
 
