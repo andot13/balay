@@ -1,5 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var User = require('../../models/User');
 
 module.exports = function() {
 
@@ -9,17 +10,42 @@ module.exports = function() {
       callbackURL: 'http://localhost:3000/auth/google/callback'
     },
     function(accessToken, refreshToken, profile, done) {
-      var user = {};
+      process.nextTick(function() {
+        var user = {};
+        var query = {
+          'google.id': profile.id
+        };
 
-      user.email = profile.emails[0].value;
-      user.image = profile._json.image.url;
-      user.displayName = profile._json.displayName;
+        User.findOne(query, function(err, user){
+          if(err) {
+            return done(err);
+          }
 
-      user.google = {};
-      user.google.id = profile.id;
-      user.google.token = accessToken;
+          if(user) {
+            //If user found, log them in
+            done(null, user);
 
-      done(null, user);
+          } else {
+            // create new user
+            var user = new User;
+
+            user.email = profile.emails[0].value;
+            user.image = profile._json.image.url;
+            user.displayName = profile._json.displayName;
+
+            user.google = {};
+            user.google.id = profile.id;
+            user.google.token = accessToken;
+
+            user.save(function(err) {
+              if(err) {
+                throw err;
+              }
+              return done(null, user);
+            });
+          }
+        });
+      });
     }
   ));
 

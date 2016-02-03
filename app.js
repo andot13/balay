@@ -16,6 +16,7 @@ var config           = require('./config');
 
 var app = express();
 
+mongoose.connect(config.database.uri);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +35,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 
-mongoose.connect(config.database.uri);
 
 // Handle Express Sessions
 app.use(session({ 
