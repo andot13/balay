@@ -17,17 +17,6 @@ var config           = require('./config');
 var app = express();
 
 
-passport.use(new GoogleStrategy({
-    clientID: '1071203922603-osb76t6lb92mb2fs1t68ug3iq34i5g0q.apps.googleusercontent.com',
-    clientSecret: 'jOgRuFfotdPqNsJ9vApYO4aM',
-    callbackURL: 'http://localhost:3000/auth/google/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    done(null, profile);
-  }
-));
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -54,6 +43,8 @@ app.use(session({
   resave: true
 }));
 
+
+require('./config/passport')(app);
 
 
 // Validator
@@ -92,22 +83,14 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(session({secret: 'andypogi', saveUninitialized: true, resave: false }));
 
 // Passport 
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done){
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done){
-  done(null, user);
-});
+require('./config/passport')(app);
 
 var routes           = require('./routes/index');
 var users            = require('./routes/users');
 var propertiesRouter = require('./routes/properties');
 var areas            = require('./routes/areas');
 var auth             = require('./routes/auth');
+var account             = require('./routes/account');
 
 var apiProperties    = require('./routes/api/properties');
 var apiUsers= require('./routes/api/users');
@@ -119,6 +102,7 @@ app.use('/users', users);
 app.use('/properties', propertiesRouter);
 app.use('/areas', areas);
 app.use('/auth', auth);
+app.use('/account', account);
 
 
 var User = require('./models/User');

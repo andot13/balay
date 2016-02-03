@@ -10,9 +10,22 @@ block content
         a.navbar-brand(href='#') Balay 
       #navbar.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
-          li
           if(user)
-            img(src="#{user.image}")
-            span= user.name
+          dropdown
+            button#dropdownMenu1.btn.dropdown_header.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+              img.header_avatar(src="#{user.image}")
+              | #{user.name} 
+              span.caret
+            ul.dropdown-menu(aria-labelledby='dropdownMenu1')
+              li
+                span= user.email
+              li
+                a(href='#') Another action
+              li
+                a(href='#') Something else here
+              li.divider(role='separator')
+              li
+                a(href='/logout') Logout 
+            li
         form.navbar-form.navbar-right
           input.form-control(type='text', placeholder='Search...')

@@ -2,11 +2,19 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
 
-router.get('/', function(req, res, next) {
+// router.use('/', function(req, res, next) { 
+//   if(!req.user) {
+//     res.redirect('/');
+//   }
+//   next();
+// }
+
+router.get('/', function(req, res) {
   res.render('dashboard', {
     user: {
-      name: req.user.displayName,
-      image: req.user._json.image.url
+      name: req.user.displayName, 
+      image: req.user.image,
+      email: req.user.email
     }
   });
   // else {

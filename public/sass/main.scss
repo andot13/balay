@@ -33,6 +33,13 @@ body {
 .navbar--account {
   background: white;
   padding-top: 0;
+
+  li {
+    a {
+      color: black !important;
+    }
+  }
+
 }
 
 .navbar-right {
@@ -51,6 +58,16 @@ body {
   border-radius: 4px;
 }
 
+.header_avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.dropdown_header {
+  border: none;
+  background: none;
+  outline: none;
+}
 
 
 .homepage {

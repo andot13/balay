@@ -112,19 +112,19 @@ router.get('/logout', function(req, res) {
   res.redirect('/login');
 });
 
-router.get('/account', isLoggedIn ,function(req, res) {
-  // Disable back button
-  // res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-  // res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
-
-  res.render('dashboard', {
-    title: 'Dashboard',
-    user: {
-      name: req.user.displayName,
-      image: req.user._json.image.url
-    }
-  });
-});
+// router.get('/account', isLoggedIn ,function(req, res) {
+//   // Disable back button
+//   // res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+//   // res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');
+//
+//   res.render('dashboard', {
+//     title: 'Dashboard',
+//     user: {
+//       name: req.user.displayName,
+//       image: req.user._json.image.url
+//     }
+//   });
+// });
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
