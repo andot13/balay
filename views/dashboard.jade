@@ -8,6 +8,7 @@ block content
     .row
       .col-sm-3.col-md-2.sidebar
         ul.nav.nav-sidebar
+          p=user.userId
           li.active
             a(href='#')
               | Dashboard
@@ -23,6 +24,14 @@ block content
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
         h1.page-header Dashboard
         .row.placeholders
+          if(user.properties.length === 0)
+            p Looks like you haven't listed anything yet. 
+              a(href="#") Add a new property
+          else
+            ul
+            -each property in user.properties 
+              li
+                a(href="/properties/#{property._id}/") #{property.name} 
           .col-xs-6.col-sm-3.placeholder
             img.img-responsive(src='/images/image-1.jpg', alt='Generic placeholder thumbnail')
             h4 Label
