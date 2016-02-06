@@ -31,7 +31,10 @@ gulp.task('sass-dev', function(){
 		// .pipe(plumber())
 		.pipe(sourcemaps.init())
     .pipe(sass({
-      includePaths: ['./bower_components/font-awesome/scss']
+      includePaths: [
+        './bower_components/font-awesome/scss',
+        './bower_components/bootstrap-sass/assets/stylesheets'
+      ]
     }).on('error', sass.logError))
 		.pipe(autoprefixer('last 2 versions'))
 		.pipe(reload({ stream: true }))
