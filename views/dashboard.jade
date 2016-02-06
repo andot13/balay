@@ -26,28 +26,15 @@ block content
         .row.placeholders
           if(user.properties.length === 0)
             p Looks like you haven't listed anything yet. 
-              a(href="#") Add a new property
+              a(href="#") Add new property
           else
             ul
             -each property in user.properties 
-              li
-                a(href="/properties/#{property._id}/") #{property.name} 
-          .col-xs-6.col-sm-3.placeholder
-            img.img-responsive(src='/images/image-1.jpg', alt='Generic placeholder thumbnail')
-            h4 Label
-            span.text-muted Something else
-          .col-xs-6.col-sm-3.placeholder
-            img.img-responsive(src='/images/image-2.jpg', alt='Generic placeholder thumbnail')
-            h4 Label
-            span.text-muted Something else
-          .col-xs-6.col-sm-3.placeholder
-            img.img-responsive(src='/images/image-1.jpg', alt='Generic placeholder thumbnail')
-            h4 Label
-            span.text-muted Something else
-          .col-xs-6.col-sm-3.placeholder
-            img.img-responsive(src='/images/image-2.jpg', alt='Generic placeholder thumbnail')
-            h4 Label
-            span.text-muted Something else
+              .col-xs-6.col-sm-4.placeholder
+                img.img-responsive(src='/images/image-1.jpg', alt='Generic placeholder thumbnail')
+                h4
+                  a(href="/properties/#{property._id}/") #{property.name} 
+                span.text-muted Something else
         h2.sub-header Section title
         .table-responsive
           table.table.table-striped
