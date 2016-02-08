@@ -1,0 +1,15 @@
+.col-sm-3.col-md-2.sidebar
+  ul.nav.nav-sidebar
+    p=user.userId
+    li.active
+      a(href='/account')
+        | Dashboard
+        span.sr-only (current)
+    li
+      a(href='#') Profile 
+    li
+      a(href='#') Your Listings 
+    li
+      a(href='#') Settings 
+    li
+      a(href='/logout') Logout 

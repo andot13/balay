@@ -18,14 +18,19 @@ router.route('/')
     });
   })
   .post(function(req, res){
-    var property = new Properties(req.body);
+    var property = new Properties();
+
+    property.name = req.body.name;
+    property.bedroom = req.body.bedroom;
+    property.shower = req.body.shower;
+    property.posted_by = req.body.posted_by;
 
     property.save( function(err){
       if (err) {
         res.send(err);
       }
-      res.status(201).send(property);
-
+      req.flash('success', 'Property created');
+      res.redirect('/account');
     });
 
   });

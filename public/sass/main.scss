@@ -1,6 +1,16 @@
+@import "bootstrap/mixins";
 @import 'bootstrap';
 @import 'font-awesome';
 
+// Import base
+@import 'base/variables';
 @import 'base/base';
 
+// Import modules
+@import 'modules/card';
 
+// Import layout
+@import 'layout/nav';
+@import 'layout/dashboard';
+
+// Import helpers

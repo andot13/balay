@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
 
 router.get('/signup', function(req, res) {
   if (req.isAuthenticated()){
-    res.redirect('/dashboard');
+    res.redirect('/account');
   }
 
   res.render('signup', {

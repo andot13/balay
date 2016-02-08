@@ -1,0 +1,53 @@
+.navbar {
+  padding-top: 1em;
+  margin-bottom: 0;
+  // background-color: #fff;
+  background: transparent;
+  border-color: transparent;
+
+  li {
+    a {
+      padding: 7px 12px;
+      margin: 0 10px 0 0;
+    }
+  }
+}
+
+.navbar--account {
+  background: white;
+  padding-top: 0;
+
+  li {
+    a {
+      color: black !important;
+    }
+  }
+
+}
+
+.navbar-right {
+  li {
+    font-size: .9em;
+    a {
+      padding: 7px 12px;
+      margin: 0 10px 0 0;
+      color: white;
+    }
+  }
+}
+
+.nav--list {
+  border: 2px solid white;
+  border-radius: 4px;
+}
+
+.header_avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.dropdown_header {
+  border: none;
+  background: none;
+  outline: none;
+}

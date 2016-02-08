@@ -3,38 +3,33 @@ extends layout
 block content
   // include ./layout/nav.jade
   include ./layout/account/account-nav.jade
-
   .container-fluid
     .row
-      .col-sm-3.col-md-2.sidebar
-        ul.nav.nav-sidebar
-          p=user.userId
-          li.active
-            a(href='#')
-              | Dashboard
-              span.sr-only (current)
-          li
-            a(href='#') Profile 
-          li
-            a(href='#') Your Listings 
-          li
-            a(href='#') Settings 
-          li
-            a(href='/logout') Logout 
+      include ./layout/account/account-sidebar.jade
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-        h1.page-header Dashboard
+        != messages()
+        h1.page-header Dashboard 
+        a(href="/account/properties/add") Add property
         .row.placeholders
           if(user.properties.length === 0)
             p Looks like you haven't listed anything yet. 
               a(href="#") Add new property
           else
-            ul
             -each property in user.properties 
-              .col-xs-6.col-sm-4.placeholder
-                img.img-responsive(src='/images/image-1.jpg', alt='Generic placeholder thumbnail')
-                h4
-                  a(href="/properties/#{property._id}/") #{property.name} 
-                span.text-muted Something else
+              .card
+                div.card__image-container
+                  a.card__title(href="/properties/#{property._id}/") #{property.name} 
+                  img.card__image(src='/images/image-1.jpg', alt='Generic placeholder thumbnail')
+                footer.card__footer
+                  div
+                    span=property.bedroom
+                    i.flaticon-furniture117
+                  div
+                    span=property.shower
+                    i.flaticon-showers7
+                  div
+                    span=property.bedroom
+                    i.flaticon-home180
         h2.sub-header Section title
         .table-responsive
           table.table.table-striped
@@ -142,12 +137,4 @@ block content
                 td ligula
                 td in
                 td libero
-        h2 Dashboard
-        ul
-          li 
-            a(href="/properties/create") List new property
-          li
-            a(href='/logout') Logout
-
-        != messages()
 include ./layout/footer.jade

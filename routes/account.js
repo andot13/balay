@@ -29,14 +29,20 @@ router.get('/', function(req, res) {
 });
 
 router.get('/properties/add', function(req, res, next) {
-  var user = User.find({id: req.user}, function(err, user){
-    if(err) {
-      throw err;
+  Properties.find({'posted_by': req.user._id}, function(err, props){
+    if(err){
+      res.send(err);
     }
-  });
 
-  res.render('account-property-add', {
-    user: user
+    res.render('account-property-add', {
+      user: {
+        userId: req.user._id,
+        name: req.user.displayName, 
+        properties: props,
+        image: req.user.image,
+        email: req.user.email
+      }
+    });
   });
 });
 
