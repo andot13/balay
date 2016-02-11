@@ -28,15 +28,24 @@ router.get('/:property_id', function(req, res, next) {
     relatedProperties = data;
   });
 
-  Properties.findById(reqId, function(error, data){
-    if (error)
-      res.send(error);
-    res.render('property', { 
-      property: data,
-      properties: relatedProperties,
-      title: 'Express'
+  Properties.findById(reqId)
+    .populate('posted_by')
+    .exec(function(error, data){
+       res.render('property', { 
+         property: data,
+         properties: relatedProperties,
+         title: 'Express'
+       });
     });
-  });
+  // Properties.findById(reqId, function(error, data){
+  //   if (error)
+  //     res.send(error);
+  //   res.render('property', { 
+  //     property: data,
+  //     properties: relatedProperties,
+  //     title: 'Express'
+  //   });
+  // });
 });
 
 

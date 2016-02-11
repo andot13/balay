@@ -28,12 +28,12 @@ module.exports = function() {
           } else {
             // create new user
             var user = new User;
+            user.google = {};
 
-            user.email = profile.emails[0].value;
             user.image = profile._json.image.url;
             user.displayName = profile._json.displayName;
 
-            user.google = {};
+            user.google.email = profile.emails[0].value;
             user.google.id = profile.id;
             user.google.token = accessToken;
 

@@ -27,11 +27,11 @@ module.exports = function() {
             done(null, user);
           } else {
             var user = new User;
+            user.facebook = {};
 
-            user.email = profile.emails[0].value;
             user.displayName = profile.displayName;
 
-            user.facebook = {};
+            user.facebook.email = profile.emails[0].value;
             user.facebook.id = profile.id;
             user.facebook.token = accessToken;
 
