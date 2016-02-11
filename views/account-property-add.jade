@@ -33,12 +33,13 @@ block content
                 label
                   input#shower(type='radio', name='shower', value='3')
                   | 3 showers 
-          // .form-group.row
-          //   label.col-sm-2.form-control-label(for='selectbasic') Area
-          //   .col-sm-3
-          //     select#selectbasic.form-control(name='selectbasic')
-          //       option(value='1') Option one
-          //       option(value='2') Option two
+          .form-group.row
+            label.col-sm-2.form-control-label(for='selectbasic') Area
+            .col-sm-3
+              select.form-control(name='area')
+                each area in areas
+                  option(value='#{area._id}')=area.name
+                // option(value='2') Option two
 
           .form-group.row
             .col-sm-offset-2.col-sm-10

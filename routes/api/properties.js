@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var Properties = require('../../models/Property');
 var User  = require('../../models/User');
+var Area = require('../../models/Area');
 var router = express.Router();
 
 
@@ -24,13 +25,21 @@ router.route('/')
     property.bedroom = req.body.bedroom;
     property.shower = req.body.shower;
     property.posted_by = req.body.posted_by;
+    property.area= req.body.area;
 
-    property.save( function(err){
+    property.save( function(err, prop){
       if (err) {
         res.send(err);
       }
-      req.flash('success', 'Property created');
-      res.redirect('/account');
+
+      Area.findOneAndUpdate(
+        {"_id": property.area}, 
+        {"$addToSet" : {properties: prop.id}}, 
+        function(error, area){
+          req.flash('success', 'Property created');
+          res.redirect('/account');
+        }
+      );
     });
 
   });
