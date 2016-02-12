@@ -5,7 +5,8 @@ var areaSchema = new Schema({
   name: String,
   properties: [{
     type: Schema.Types.ObjectId,
-    ref: 'Property'
+    ref: 'Property',
+    index: true
   }]
 });
 

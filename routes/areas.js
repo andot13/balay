@@ -15,10 +15,10 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/:area_id', function(req, res, next) {
-  var areaId = req.params.area_id;
+router.get('/:areaName', function(req, res, next) {
+  var areaName = req.params.areaName;
   
-  Areas.findOne({_id: areaId}) 
+  Areas.findOne({name: areaName}) 
     .populate('properties') 
     .exec(function(error, props){
       if (error)
