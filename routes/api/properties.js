@@ -34,7 +34,7 @@ router.route('/')
 
       Area.findOneAndUpdate(
         {"_id": property.area}, 
-        {"$addToSet" : {properties: prop.id}}, 
+        {"$addToSet" : {properties: prop._id}}, 
         function(error, area){
           req.flash('success', 'Property created');
           res.redirect('/account');

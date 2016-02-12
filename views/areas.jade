@@ -5,9 +5,12 @@ block content
 
   - if (area)
     h2 #{area.name}
+    - if (area.properties.length === 0)
+      p No property listed in #{area.name}
+    - each prop in area.properties
+      li
+        a(href="/properties/#{prop._id}/") #{prop.name}
 
-    p TODO: Show all properties in #{area.name}
-    
   - if (areas)
     p List all areas 
     ul
