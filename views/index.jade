@@ -9,20 +9,13 @@ block content
 
   div.container.homepage__properties
     h2.homepage__properties--header Explore properties in your area
-    div.homepage__properties__container.col-sm-4
-      div.homepage__properties--image
-        img.img-responsive(src="../images/location-property-matina.jpg")
-        p.homepage__properties--name Matina 
-        a.homepage__properties--count(href="/areas/matina") 25 properties
-    div.col-sm-4
-      div.homepage__properties--image
-        img.img-responsive(src="../images/location-property-roxas.jpg")
-        p.homepage__properties--name Bangkal 
-        a.homepage__properties--count(href="/areas/bangkal") #{prop.length} properties
-    div.col-sm-4
-      div.homepage__properties--image
-        img.img-responsive(src="../images/location-property-matina.jpg")
-        p.homepage__properties--name Ulas 
-        a.homepage__properties--count(href="/areas/ulas") 25 properties
+    // #{areas}
+    - each area in areas
+      div.homepage__properties__container.col-sm-4
+        div.homepage__properties--image
+          img.img-responsive(src="../images/location-property-matina.jpg")
+          p.homepage__properties--name=area.name 
+          a.homepage__properties--count(href="/areas/#{area.name}")=area.properties.length 
+            span  properties
     a.btn.btn-primary(href="/") See All Properties
 include ./layout/footer.jade

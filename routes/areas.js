@@ -28,15 +28,6 @@ router.get('/:areaName', function(req, res, next) {
         title: 'Express'
       });
     });
-  //
-  // Areas.findOne({ _id: areaId }, function(error, data){
-  //   if (error)
-  //     res.send(error);
-  //   res.render('areas', { 
-  //     area: data,
-  //     title: 'Express'
-  //   });
-  // });
 });
 
 module.exports = router;

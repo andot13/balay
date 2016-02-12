@@ -2,19 +2,24 @@ var express = require('express');
 var passport = require('passport');
 var Properties = require('../models/Property');
 var User  = require('../models/User');
+var Area = require('../models/Area');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  Properties.find({"area": "Bangkal"},function(error, data){
-    if (error) {
-      res.send(error);
-    } else{
-      res.render('index', { 
-        prop: data
+
+  Area.find({
+      properties: {$exists: true, $ne: [] } 
+    })
+    .limit(6)
+    .populate('properties')
+    .exec(function(error, areas){
+      if(error)
+        res.send(error);
+      res.render('index', {
+        areas: areas
       });
-    }
-  });
+    });
 });
 
 router.get('/signup', function(req, res) {
