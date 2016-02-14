@@ -1,0 +1,32 @@
+.property {
+  &_title-container {
+    padding: 16px 0;
+    // background: $color-gray;
+  }
+
+  &_title {
+    // text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+  }
+
+  &_location {
+    // text-align: center;
+    color: $color-blue;
+    font-size: 14px;
+  }
+  &_main--image {
+    height: 360px;
+    overflow: hidden;
+
+    img {
+      background-size: cover;
+    }
+  }
+}
+
+.main {
+  &--public {
+    // padding-top: 100px;
+  }
+}

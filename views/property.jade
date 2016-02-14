@@ -1,8 +1,18 @@
 extends layout
 
 block content
-  include ./layout/nav.jade
-  .container
+  include ./layout/account/account-nav.jade
+  // include ./layout/nav.jade
+  div.property_main--image
+    img.img-responsive(src="/images/homepage-background.jpg")
+  div.property_title-container
+    div.container
+      div.col-sm-10
+        h2.property_title #{property.name}
+        p.property_location near Bangkal 
+  .container.main--public
+    // div.col-sm-12
+    //   img.img-responsive(src="/images/homepage-background.jpg")
     div.col-sm-9
       div.col-sm-2
         img.img-responsive(src="/images/homepage-background.jpg")

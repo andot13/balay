@@ -9,10 +9,11 @@ block content
       .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
         != messages()
         h1.page-header Dashboard 
-        a(href="/account/properties/add") Add property
+        a.btn--account-primary(href="/account/properties/add") Add property
         .row.placeholders
           if(user.properties.length === 0)
-            p Looks like you haven't listed anything yet. 
+            div.flash_info--empty-list
+              p Looks like you haven't listed anything yet. 
               a(href="#") Add new property
           else
             -each property in user.properties 
@@ -23,118 +24,14 @@ block content
                 footer.card__footer
                   div
                     span=property.bedroom
-                    i.flaticon-furniture117
+                    span bed
+                    // i.flaticon-furniture117
                   div
                     span=property.shower
-                    i.flaticon-showers7
+                    span bath 
+                    // i.flaticon-showers7
                   div
                     span=property.bedroom
-                    i.flaticon-home180
-        h2.sub-header Section title
-        .table-responsive
-          table.table.table-striped
-            thead
-              tr
-                th #
-                th Header
-                th Header
-                th Header
-                th Header
-            tbody
-              tr
-                td 1,001
-                td Lorem
-                td ipsum
-                td dolor
-                td sit
-              tr
-                td 1,002
-                td amet
-                td consectetur
-                td adipiscing
-                td elit
-              tr
-                td 1,003
-                td Integer
-                td nec
-                td odio
-                td Praesent
-              tr
-                td 1,003
-                td libero
-                td Sed
-                td cursus
-                td ante
-              tr
-                td 1,004
-                td dapibus
-                td diam
-                td Sed
-                td nisi
-              tr
-                td 1,005
-                td Nulla
-                td quis
-                td sem
-                td at
-              tr
-                td 1,006
-                td nibh
-                td elementum
-                td imperdiet
-                td Duis
-              tr
-                td 1,007
-                td sagittis
-                td ipsum
-                td Praesent
-                td mauris
-              tr
-                td 1,008
-                td Fusce
-                td nec
-                td tellus
-                td sed
-              tr
-                td 1,009
-                td augue
-                td semper
-                td porta
-                td Mauris
-              tr
-                td 1,010
-                td massa
-                td Vestibulum
-                td lacinia
-                td arcu
-              tr
-                td 1,011
-                td eget
-                td nulla
-                td Class
-                td aptent
-              tr
-                td 1,012
-                td taciti
-                td sociosqu
-                td ad
-                td litora
-              tr
-                td 1,013
-                td torquent
-                td per
-                td conubia
-                td nostra
-              tr
-                td 1,014
-                td per
-                td inceptos
-                td himenaeos
-                td Curabitur
-              tr
-                td 1,015
-                td sodales
-                td ligula
-                td in
-                td libero
+                    span sq meter 
+                    // i.flaticon-home180
 include ./layout/footer.jade

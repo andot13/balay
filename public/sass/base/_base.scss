@@ -2,14 +2,14 @@
 
 body {
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font--secondary; 
+  color: $color-gray--text;
 }
 
 .logo {
   color: $color-blue;
+  font-family: $font--primary; 
 }
-
-
 
 .homepage {
   &__jumbotron {
@@ -22,7 +22,7 @@ body {
   &__header {
     padding-top: 1.5em;
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 2.7em;
     color: white;
     text-align: center;
   }

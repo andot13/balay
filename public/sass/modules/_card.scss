@@ -1,9 +1,9 @@
 .card {
+  padding: 8px 0;
   position: relative;
   @include make-xs-column(12);
   @include make-sm-column(6);
   @include make-md-column(4);
-
 
   &__title {
     position: absolute;
@@ -40,6 +40,7 @@
     @include make-sm-column(12);
     border: 1px solid $color-gray--border;
     border-top: none;
+    background: $color-white;
     padding: .4em;
     @include border-bottom-radius(4px);
     

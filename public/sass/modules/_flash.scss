@@ -1,0 +1,19 @@
+.flash {
+  &_info {
+    padding: 40px;
+    background: lighten($color-gray--text, 57%);
+    border-radius: 4px;
+    text-align: center;
+
+    &--empty-list {
+      padding: 40px;
+      background: lighten($color-gray--text, 57%);
+      border-radius: 4px;
+
+      p {
+        text-align: center;
+        color: $color-gray--text;
+      }
+    }
+  }
+}
