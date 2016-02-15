@@ -1,5 +1,5 @@
 .flash {
-  &_info {
+  &__info {
     padding: 40px;
     background: lighten($color-gray--text, 57%);
     border-radius: 4px;
@@ -9,11 +9,13 @@
       padding: 40px;
       background: lighten($color-gray--text, 57%);
       border-radius: 4px;
-
-      p {
-        text-align: center;
-        color: $color-gray--text;
-      }
+      text-align: center;
+    }
+    &-header {
+      font-size: 1.3em;
+      // font-weight: bold;
+      text-align: center;
+      color: $color-gray--text;
     }
   }
 }

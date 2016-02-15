@@ -10,9 +10,12 @@
   &__container {
     overflow: hidden;
     transition: all .4s;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 
     &:hover {
-      @extend .box-shadow;
+      // @extend .box-shadow;
+      box-shadow: 0 4px 41px -7px rgba(0,0,0,0.4);
       cursor: pointer;
 
     }
@@ -55,7 +58,6 @@
 
   &__footer {
     @include make-sm-column(12);
-    // border: 1px solid $color-gray--border;
     border-top: none;
     background: $color-white;
     padding: .4em;

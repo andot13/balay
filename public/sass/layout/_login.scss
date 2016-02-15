@@ -1,0 +1,37 @@
+.login {
+
+  &__container {
+    margin-top: 100px;
+    background: $color-white;
+    padding: 40px;
+
+    // @include make-xs-column(12);
+    @include make-sm-column(6);
+    // @include make-md-column(4);
+  }
+
+  &__social-link {
+    text-align: center;
+  }
+
+  &__link--facebook {
+    // background: #3B5998;
+    width: 386px;
+    height: 43px;
+    background: url('../images/btn_facebook_login_2.png') no-repeat;
+    display: block;
+    // @include center-block;
+    @include hide-text;
+  }
+
+  &__link--google{
+    border: 1px solid black;
+    margin-top: 10px;
+    width: 386px;
+    height: 43px;
+    display: block;
+    background: url('../images/btn_google_signin_light_pressed_web.png') no-repeat;
+    // background: url('../images/btn_google_signin_dark_normal_web.png') no-repeat;
+    @include hide-text;
+  }
+}

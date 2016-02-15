@@ -1,26 +1,29 @@
 extends layout
 
 block content
-  include ./layout/nav.jade
-  h2 Login to your account
-  != messages()
+  include ./layout/account/account-nav.jade
+  // include ./layout/nav.jade
   div.container
-    a(href="/auth/google") Login with google
-    a(href="/auth/facebook") Login with facebook
-  div.container
-    if errors
-      ul
-      each error, i in errors
-        li.alert.alert-danger #{error.msg}
-    form.form-horizontal(method='post' action="/login")
-      div.form-group
-        label(for="email") Email:
-        input(type="text", name="email", value="#{ user? user : '' }" novalidate)
-      div.form-group
-        label(for="password") Password:
-        input(type="password", name="password", novalidate)
-      div.form-group
-        input(type="submit")
-  p Don't have an account? 
-    a(href="/signup") Sign up now
+    div.login__container
+      h2 Login to your account
+      != messages()
+      div.container.login__social-link
+        a.login__link--facebook(href="/auth/facebook") Sign in with Facebook
+        a.login__link--google(href="/auth/google") Login with google
+      div.container
+        if errors
+          ul
+          each error, i in errors
+            li.alert.alert-danger #{error.msg}
+        form.form-horizontal(method='post' action="/login")
+          div.form-group
+            label(for="email") Email:
+            input(type="text", name="email", value="#{ user? user : '' }" novalidate)
+          div.form-group
+            label(for="password") Password:
+            input(type="password", name="password", novalidate)
+          div.form-group
+            input(type="submit")
+      p Don't have an account? 
+        a(href="/signup") Sign up now
 include ./layout/footer.jade

@@ -4,17 +4,32 @@ body {
   font-size: 16px;
   font-family: $font--secondary; 
   color: $color-gray--text;
+  background: $color-blue--bg;
 }
 
 .logo {
-  color: $color-blue;
-  font-family: $font--primary; 
+  color: $color-white;
+  font-family: $font--secondary; 
+  font-weight: bold;
+  font-size: 1.4em;
+  letter-spacing: 1.2px;
+
+  &:hover {
+    color: $color-white;
+  }
+
+  &--account {
+    color: $color-blue;
+    font-family: $font--secondary; 
+    font-weight: bold;
+    font-size: 1.4em;
+    letter-spacing: 1.2px;
+  }
 }
 
 .homepage {
   &__jumbotron {
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) ),
-    // background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(33, 128, 215, .3 ) ),
     url('../images/homepage-background.jpg');
     background-size: cover;
     height: 60vh;
