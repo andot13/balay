@@ -13,7 +13,8 @@ body {
 
 .homepage {
   &__jumbotron {
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) ),
+    // background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(33, 128, 215, .3 ) ),
     url('../images/homepage-background.jpg');
     background-size: cover;
     height: 60vh;
@@ -26,6 +27,14 @@ body {
     color: white;
     text-align: center;
   }
+
+  &__form {
+    margin-top: 30px;
+    color: $color-white;
+    text-align: center;
+    font-size: 24px;
+  }
+
   
   &__sub-header {
     font-size: 16px;
@@ -42,6 +51,13 @@ body {
 
     &--image {
       background: black;
+      margin-bottom: 20px;
+      transition: all .4s;
+      box-shadow: none;
+
+      &:hover {
+        @extend .box-shadow;
+      }
 
       img {
         opacity: 0.7;

@@ -1,0 +1,40 @@
+.area{
+  &__title-container {
+    padding: 16px 0;
+    // background: $color-gray;
+  }
+
+  &__title {
+    // text-align: center;
+    font-size: 24px;
+    font-weight: normal;
+  }
+
+  &__location {
+    // text-align: center;
+    color: $color-blue;
+    font-size: 14px;
+  }
+
+  &__main--title {
+    font-family: $font--secondary;
+    font-size: 3em;
+    font-weight: bold;
+  }
+
+  &__main--image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      background-size: cover;
+    }
+  }
+}
+
+.main {
+  &--public {
+    // padding-top: 100px;
+  }
+}

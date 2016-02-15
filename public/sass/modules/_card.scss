@@ -1,9 +1,22 @@
 .card {
+  margin-bottom: 20px;
   padding: 8px 0;
   position: relative;
   @include make-xs-column(12);
   @include make-sm-column(6);
   @include make-md-column(4);
+
+
+  &__container {
+    overflow: hidden;
+    transition: all .4s;
+
+    &:hover {
+      @extend .box-shadow;
+      cursor: pointer;
+
+    }
+  }
 
   &__title {
     position: absolute;
@@ -24,6 +37,9 @@
 
   &__image-container {
     position: relative;
+    overflow: hidden;
+    @include border-top-radius(4px);
+    
   }
 
   &__image-container::before {
@@ -33,12 +49,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.3);
+    // background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
   }
 
   &__footer {
     @include make-sm-column(12);
-    border: 1px solid $color-gray--border;
+    // border: 1px solid $color-gray--border;
     border-top: none;
     background: $color-white;
     padding: .4em;

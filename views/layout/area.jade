@@ -7,6 +7,12 @@ block content
   div.area__main--image
     img.img-responsive(src="/images/homepage-background.jpg")
   div.area__title-container
+    div.container
+      div.col-sm-9
+        h2.area__main--title #{area.name}
+        p Adipisicing corporis natus necessitatibus sed illo! Recusandae alias facilis fugiat laudantium temporibus. Sapiente minima dignissimos nam atque debitis. In dolore.
+      div.col-sm-3
+        h2 #{area.properties.length} Properties
   div.container.main--public
     div.col-sm-9  
       - if (area)

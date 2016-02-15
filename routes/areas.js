@@ -23,7 +23,7 @@ router.get('/:areaName', function(req, res, next) {
     .exec(function(error, props){
       if (error)
         res.send(error);
-      res.render('areas', { 
+      res.render('area', { 
         area: props,
         title: 'Express'
       });
