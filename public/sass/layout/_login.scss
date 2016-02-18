@@ -3,15 +3,48 @@
   &__container {
     margin-top: 100px;
     background: $color-white;
-    padding: 40px;
+    padding: 20px 10px;
+    border-radius: 8px;
+    border: 1px solid $color-gray;
 
     // @include make-xs-column(12);
     @include make-sm-column(6);
+    @include make-sm-column-offset(3);
     // @include make-md-column(4);
   }
 
-  &__social-link {
+  &__header {
     text-align: center;
+  }
+
+  &__footer {
+    text-align: center;
+  }
+  &__social-link {
+    padding: 20px 0;
+    border-right: 1px solid $color-gray;
+    border-top: 1px solid $color-gray;
+
+    p {
+      font-size: .8em;;
+      font-family: $font--primary;;
+    }
+  }
+
+  &__local-link {
+    padding: 20px 0 0 20px;
+    border-top: 1px solid $color-gray;
+
+    p {
+      font-size: .8em;;
+      font-family: $font--primary;;
+    }
+  }
+
+  &__footer {
+    text-align: center;
+    font-family: $font--primary;
+    font-size: .9em;;
   }
 
   &__link--facebook {
