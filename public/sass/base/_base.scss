@@ -8,11 +8,7 @@ body {
 }
 
 .logo {
-  // color: $color-white;
-  // font-family: $font--secondary; 
-  // font-weight: bold;
   font-size: 1.4em;
-  // letter-spacing: 1.2px;
   background: url('../images/logo-blue-white.png') 0 0 no-repeat;
   width: 210px;
   height: 100px;;
@@ -25,7 +21,6 @@ body {
   &--account {
     background: url('../images/logo.png') 0 0 no-repeat;
     width: 30px;
-    // height: 60px;;
     @include hide-text();
   }
 }
