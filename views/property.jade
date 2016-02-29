@@ -3,16 +3,31 @@ extends layout
 block content
   include ./layout/account/account-nav.jade
   // include ./layout/nav.jade
-  div.property_main--image
+  div.property__main--image
     img.img-responsive(src="/images/homepage-background.jpg")
-  div.property_title-container
+  div.property__title-container
     div.container
-      div.col-sm-10
-        h2.property_title #{property.name}
-        p.property_location near Bangkal 
+      div.property__detail-container
+        div.property__detail--shower
+          img(src="/images/icons/shower-head.png")
+          span #{property.shower} Shower
+        div.property__detail--bedroom
+          img(src="/images/icons/single-bed.png")
+          span #{property.bedroom} Bed
+        div.property__detail--square
+          img(src="/images/icons/house-scale.png")
+          span #{property.area} 2 Sqmt
+        div.property__detail--location
+          // img(src="/images/icons/location-pointer-gray-text.png")
+          img(src="/images/icons/location-pointer-gray-border.png")
+          span Bangkal 
+        div.property__detail--type
+          // img(src="/images/icons/location-pointer-gray-text.png")
+          img(src="/images/icons/location-pointer-gray-border.png")
+          span Apartment 
+      div.col-sm-2
+        span #{property.price} p 88,888,888 
   .container.main--public
-    // div.col-sm-12
-    //   img.img-responsive(src="/images/homepage-background.jpg")
     div.col-sm-9
       div.col-sm-2
         img.img-responsive(src="/images/homepage-background.jpg")

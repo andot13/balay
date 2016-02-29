@@ -7,32 +7,32 @@
         span.icon-bar
         span.icon-bar
       a.logo.navbar-brand(href='/') Balay 
+        // li.dropdown
+        //   a.dropdown-toggle(href='#', data-toggle='dropdown')
+        //     | Davao 
+        //     span.caret
+        //   ul.dropdown-menu(role='menu')
+        //     li
+        //       a(href='#') Cebu 
+        //     li
+        //       a(href='#') Manila 
+        //     li
+        //       a(href='#') Something else here
+        //     li.divider
+        //     li.dropdown-header Nav header
+        //     li
+        //       a(href='#') Separated link
+        //     li
+        //       a(href='#') One more separated link
     .navbar-collapse.collapse
-      // ul.nav.navbar-nav
-      //   li.dropdown
-      //     a.dropdown-toggle(href='#', data-toggle='dropdown')
-      //       | Dropdown 
-      //       span.caret
-      //     ul.dropdown-menu(role='menu')
-      //       li
-      //         a(href='#') Action
-      //       li
-      //         a(href='#') Another action
-      //       li
-      //         a(href='#') Something else here
-      //       li.divider
-      //       li.dropdown-header Nav header
-      //       li
-      //         a(href='#') Separated link
-      //       li
-      //         a(href='#') One more separated link
-      ul.nav.navbar-nav.navbar-right
+      ul.nav.navbar-nav.navlinks
         li
           a(href='/areas') Areas
         li
           a(href='/properties') Property
         li
           a(href='/agents') Find an Agent 
+      ul.nav.navbar-nav.navbar-right
         // If user is NOT logged in
         if !user
           li

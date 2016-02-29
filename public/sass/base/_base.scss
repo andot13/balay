@@ -8,10 +8,11 @@ body {
 }
 
 .logo {
-  font-size: 1.4em;
+  position: relative;
+  top: -6px;
   background: url('../images/logo-blue-white.png') 0 0 no-repeat;
-  width: 210px;
-  height: 100px;;
+  width: 150px;
+  height: 43px;
   @include hide-text();
 
   &:hover {
@@ -63,8 +64,11 @@ body {
 
 
     &--image {
-      background: black;
+      height: 196px;
       margin-bottom: 20px;
+      overflow: hidden;
+
+      background: black;
       transition: all .4s;
       box-shadow: none;
 
@@ -99,8 +103,10 @@ body {
     }
 
     &--name {
+      font-family: $font--primary;;
+
       width: 50%;
-      height: 30%;
+      height: 35%;
       overflow: hidden;
       margin: auto;
       position: absolute;

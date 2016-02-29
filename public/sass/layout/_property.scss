@@ -1,6 +1,51 @@
 .property {
-  &_title-container {
+  &__title-container {
     padding: 16px 0;
+    background: $color-white;
+  }
+
+  &__detail-container {
+    @include make-sm-column(10);
+    font-size: .9em;
+    img {
+      @include center-block;
+      margin-bottom: 8px;
+    }
+  }
+  
+  &__detail--shower {
+    width: 7em;
+    float: left;
+    padding-right: 30px;
+    text-align: center;
+    border-right: 1px solid $color-gray;
+  }
+
+  &__detail--bedroom {
+    width: 7em;
+    float: left;
+    text-align: center;
+    border-right: 1px solid $color-gray;
+  }
+  &__detail--square {
+    width: 7em;
+    float: left;
+    text-align: center;
+    border-right: 1px solid $color-gray;
+  }
+
+  &__detail--location {
+    width: 7em;
+    float: left;
+    text-align: center;
+    border-right: 1px solid $color-gray;
+  }
+
+  &__detail--type{
+    width: 7em;
+    float: left;
+    text-align: center;
+    border-right: 1px solid $color-gray;
   }
 
   &_title {
@@ -12,7 +57,24 @@
     color: $color-blue;
     font-size: 14px;
   }
-  &_main--image {
+
+
+  &__main--price{
+    position: absolute;
+    bottom: 20px;
+    right: 100px;
+    padding: 10px 20px;
+    background: $color-blue;
+    color: $color-white;
+  }
+
+  &__main--title {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  &__main--image {
+    position: relative;
     height: 360px;
     overflow: hidden;
 

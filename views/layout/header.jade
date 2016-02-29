@@ -1,6 +1,7 @@
 doctype html
 html
   head
+    base(href="/")
     title= title
     link(href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet')
     link(href='https://fonts.googleapis.com/css?family=Raleway:400,700,400italic,700italic' rel='stylesheet')
@@ -13,6 +14,8 @@ html
     script(src='/angular2/bundles/angular2-polyfills.js')
     script(src='/systemjs/dist/system.src.js')
     script(src='/rxjs/bundles/Rx.js')
+    script(src='/angular2/bundles/router.dev.js')
+    script(src='/angular2/bundles/http.dev.js')
     script(src='/angular2/bundles/angular2.dev.js')
 
     script.
@@ -28,6 +31,6 @@ html
         .then(null, console.error.bind(console));
 
   body
-    my-app Loading...
+    // my-app Loading...
     block content
 
