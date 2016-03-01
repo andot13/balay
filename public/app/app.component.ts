@@ -4,24 +4,20 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {ProfileComponent} from './profile.component';
-import {SidebarComponent} from './sidebar/sidebar.component';
+import {ProfileComponent} from './profile/profile.component';
 
 @Component({
     selector: 'my-app',
     template: `
-      <sidebar></sidebar>
+      <ul>
+        <li><a href="" [routerLink]="['Dashboard']">Dashboard</a></li>
+        <li><a href="" [routerLink]="['Profile']">Profile</a></li>
+      </ul>
       <div class="main">
         <router-outlet></router-outlet>
-        <span [class.is-awesome]="inputElement.value === 'yes' ">it's awesome </span>
-        Is it awesome?
-        <input type="text" #inputElement (keyup)="0">
-        <button [disabled]="!inputElement.value.length">Submit</button>
       </div>
     `,
-    styleUrls: ['../stylesheets/test.css'],
     directives: [
-      SidebarComponent,
       ROUTER_DIRECTIVES
     ],
     providers: [

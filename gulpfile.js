@@ -1,17 +1,15 @@
 var 	gulp     = require('gulp'),
 	uglify       = require('gulp-uglify'),
-	// plumber      = require('gulp-plumber'),
+	jade         = require('gulp-jade'),
 	sass         = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	nodemon      = require('gulp-nodemon'),
 	browserSync  = require('browser-sync'),
 	reload       = browserSync.reload,
-	sourcemaps 	 = require('gulp-sourcemaps'),
-	// minifyCss 	 = require('gulp-minify-css'),
+	sourcemaps   = require('gulp-sourcemaps'),
 	imagemin     = require('gulp-imagemin');
 	pngquant     = require('imagemin-pngquant');
 	rename       = require('gulp-rename');
-	// jshint = require('gulp-jshints');
 
 // Scripts Task
 gulp.task('scripts', function(){
@@ -86,6 +84,15 @@ gulp.task('templates', function(){
 		.pipe(reload({ stream: true }))
 });
 
+// Template Task For Angular
+gulp.task('templates:angular', function(){
+	gulp.src('public/app/**/*.jade')
+		.pipe(jade())
+		.pipe(reload({ stream: true }))
+    .pipe(gulp.dest('public/app/'))
+});
+
+
 //Image Optimisation
 gulp.task('images', function(){
 	return gulp.src('public/images/**/*')
@@ -104,6 +111,7 @@ gulp.task('watch', function(){
 	gulp.watch('public/sass/**/*.scss', ['sass-dev']);
 	// gulp.watch('public/images/**/*', ['images']);
 	gulp.watch('views/**/*.jade', ['templates']);
+	gulp.watch('public/**/*.jade', ['templates:angular']);
 });
 
 

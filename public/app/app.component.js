@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboard/dashboard.component', './profile.component', './sidebar/sidebar.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboard/dashboard.component', './profile/profile.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, dashboard_component_1, profile_component_1, sidebar_component_1;
+    var core_1, http_1, router_1, dashboard_component_1, profile_component_1;
     var AppComponent;
     return {
         setters:[
@@ -26,9 +26,6 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
             },
             function (profile_component_1_1) {
                 profile_component_1 = profile_component_1_1;
-            },
-            function (sidebar_component_1_1) {
-                sidebar_component_1 = sidebar_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -40,10 +37,8 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n      <sidebar></sidebar>\n      <div class=\"main\">\n        <router-outlet></router-outlet>\n        <span [class.is-awesome]=\"inputElement.value === 'yes' \">it's awesome </span>\n        Is it awesome?\n        <input type=\"text\" #inputElement (keyup)=\"0\">\n        <button [disabled]=\"!inputElement.value.length\">Submit</button>\n      </div>\n    ",
-                        styleUrls: ['../stylesheets/test.css'],
+                        template: "\n      <ul>\n        <li><a href=\"\" [routerLink]=\"['Dashboard']\">Dashboard</a></li>\n        <li><a href=\"\" [routerLink]=\"['Profile']\">Profile</a></li>\n      </ul>\n      <div class=\"main\">\n        <router-outlet></router-outlet>\n      </div>\n    ",
                         directives: [
-                            sidebar_component_1.SidebarComponent,
                             router_1.ROUTER_DIRECTIVES
                         ],
                         providers: [

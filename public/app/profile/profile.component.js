@@ -22,7 +22,7 @@ System.register(['angular2/core'], function(exports_1) {
                 ProfileComponent = __decorate([
                     core_1.Component({
                         selector: 'profile',
-                        templateUrl: '/app/test.html'
+                        template: " <h2>This is your profile</h2>"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ProfileComponent);

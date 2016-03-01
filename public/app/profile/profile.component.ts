@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 
 @Component({
   selector: 'profile',
-  templateUrl: '/app/test.html'
+  template: ` <h2>This is your profile</h2>`
 })
 export class ProfileComponent{
 }
