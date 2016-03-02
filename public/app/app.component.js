@@ -30,6 +30,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
+                    this.active = 0;
                 }
                 AppComponent.prototype.ngOnInit = function () {
                     this.name = 'Andy';
@@ -37,7 +38,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n      <ul>\n        <li><a href=\"\" [routerLink]=\"['Dashboard']\">Dashboard</a></li>\n        <li><a href=\"\" [routerLink]=\"['Profile']\">Profile</a></li>\n      </ul>\n      <div class=\"main\">\n        <router-outlet></router-outlet>\n      </div>\n    ",
+                        templateUrl: 'app/app.component.html',
                         directives: [
                             router_1.ROUTER_DIRECTIVES
                         ],
@@ -47,7 +48,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
                         ]
                     }),
                     router_1.RouteConfig([
-                        { path: '/dashboard', name: 'Dashboard', component: dashboard_component_1.DashboardComponent, useAsDefault: true },
+                        { path: '/account', name: 'Dashboard', component: dashboard_component_1.DashboardComponent, useAsDefault: true },
                         { path: '/profile', name: 'Profile', component: profile_component_1.ProfileComponent }
                     ]), 
                     __metadata('design:paramtypes', [])

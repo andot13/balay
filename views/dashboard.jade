@@ -3,9 +3,6 @@ extends layout
 block content
   // include ./layout/nav.jade
   include ./layout/account/account-nav.jade
-  .container-fluid
-    .row
-      .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-        != messages()
-        my-app Loading
+  != messages()
+  my-app Loading
 include ./layout/footer.jade

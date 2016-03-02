@@ -14,7 +14,6 @@ var 	gulp     = require('gulp'),
 // Scripts Task
 gulp.task('scripts', function(){
 	gulp.src(['public/javascripts/*.js', '!public/javascripts/*.min.js'])
-		// .pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(uglify())
@@ -26,7 +25,6 @@ gulp.task('scripts', function(){
 // Style Task: Development
 gulp.task('sass-dev', function(){
 	return gulp.src('public/sass/**/*.scss')
-		// .pipe(plumber())
 		.pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
@@ -43,7 +41,6 @@ gulp.task('sass-dev', function(){
 // Style Task: Production
 gulp.task('sass-prod', function(){
 	gulp.src('public/sass/**/*.scss')
-		// .pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({ 
 			style: 'compressed',
@@ -55,7 +52,6 @@ gulp.task('sass-prod', function(){
 		 }).on('error', sass.logError))
 		.pipe(autoprefixer('last 2 versions'))
 		.pipe(reload({ stream: true }))
-		// .pipe(minifyCss({ compatibility: 'ie8'}))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('public/stylesheets/'))
@@ -80,7 +76,6 @@ gulp.task('nodemon', function (cb) {
 // Template Task
 gulp.task('templates', function(){
 	gulp.src('views/**/*.jade')
-		// .pipe(plumber())
 		.pipe(reload({ stream: true }))
 });
 
@@ -111,7 +106,7 @@ gulp.task('watch', function(){
 	gulp.watch('public/sass/**/*.scss', ['sass-dev']);
 	// gulp.watch('public/images/**/*', ['images']);
 	gulp.watch('views/**/*.jade', ['templates']);
-	gulp.watch('public/**/*.jade', ['templates:angular']);
+	gulp.watch('public/app/**/*.jade', ['templates:angular']);
 });
 
 

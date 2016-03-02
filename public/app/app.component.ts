@@ -8,15 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 
 @Component({
     selector: 'my-app',
-    template: `
-      <ul>
-        <li><a href="" [routerLink]="['Dashboard']">Dashboard</a></li>
-        <li><a href="" [routerLink]="['Profile']">Profile</a></li>
-      </ul>
-      <div class="main">
-        <router-outlet></router-outlet>
-      </div>
-    `,
+    templateUrl: 'app/app.component.html',
     directives: [
       ROUTER_DIRECTIVES
     ],
@@ -26,11 +18,12 @@ import {ProfileComponent} from './profile/profile.component';
     ]
 })
 @RouteConfig([
-  { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },
+  { path: '/account', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },
   { path: '/profile', name: 'Profile', component: ProfileComponent }
 ])
 
 export class AppComponent implements OnInit{ 
+  active:number = 0;
 
   ngOnInit() {
     this.name = 'Andy';
