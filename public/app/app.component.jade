@@ -9,7 +9,7 @@
     li
       a([routerLink]="['AccountListings']", [class.link--active]="active === 2", (click)="active = 2", href='') Your Listings 
     li
-      a(href='') Settings 
+      a([routerLink]="['Settings']", [class.link--active]="active === 3", (click)="active = 3", href='') Settings 
     li
       a(href='/logout') Logout 
 .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
