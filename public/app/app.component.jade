@@ -7,7 +7,7 @@
     li
       a([routerLink]="['Profile']", [class.link--active]="active === 1", (click)="active = 1", href='') Profile 
     li
-      a(href='') Your Listings 
+      a([routerLink]="['AccountListings']", [class.link--active]="active === 2", (click)="active = 2", href='') Your Listings 
     li
       a(href='') Settings 
     li

@@ -5,6 +5,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AccountListingsComponent} from './account-listings/listings.component';
 
 @Component({
     selector: 'my-app',
@@ -19,7 +20,8 @@ import {ProfileComponent} from './profile/profile.component';
 })
 @RouteConfig([
   { path: '/account', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },
-  { path: '/profile', name: 'Profile', component: ProfileComponent }
+  { path: '/profile', name: 'Profile', component: ProfileComponent },
+  { path: '/account/listings', name: 'AccountListings', component: AccountListingsComponent }
 ])
 
 export class AppComponent implements OnInit{ 
