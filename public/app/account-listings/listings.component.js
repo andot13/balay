@@ -1,4 +1,4 @@
-System.register(['angular2/core', './create-listing.component'], function(exports_1) {
+System.register(['angular2/core', './create-listing.component', './edit-listing.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './create-listing.component'], function(export
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, create_listing_component_1;
+    var core_1, create_listing_component_1, edit_listing_component_1;
     var AccountListingsComponent;
     return {
         setters:[
@@ -17,26 +17,29 @@ System.register(['angular2/core', './create-listing.component'], function(export
             },
             function (create_listing_component_1_1) {
                 create_listing_component_1 = create_listing_component_1_1;
+            },
+            function (edit_listing_component_1_1) {
+                edit_listing_component_1 = edit_listing_component_1_1;
             }],
         execute: function() {
             AccountListingsComponent = (function () {
                 function AccountListingsComponent() {
                     this.listingItems = new Array();
                 }
-                // listingItems = [
-                //   {name: 'Test', bedroom: 1},
-                //   {name: 'Test', bedroom: 1},
-                //   {name: 'Test', bedroom: 1},
-                //   {name: 'Test', bedroom: 1}
-                // ];
                 AccountListingsComponent.prototype.onListingAdded = function (listing) {
                     this.listingItems.push({ name: listing.name, bedroom: listing.bedroom });
+                };
+                AccountListingsComponent.prototype.onSelect = function (listing) {
+                    this.selectedListing = listing;
                 };
                 AccountListingsComponent = __decorate([
                     core_1.Component({
                         selector: 'account-listings',
-                        directives: [create_listing_component_1.CreateListingComponent],
-                        template: "\n  <section>\n    <create-listing (listAdded)=\"onListingAdded($event)\"></create-listing>\n  </section>\n  <section>\n    <h2>This are you listings</h2>\n    <ul>\n      <li *ngFor=\"#listItem of listingItems\">\n        {{ listItem.name }}\n      </li>\n    </ul>\n  </section>\n  <section>\n    Edit item\n  </section>\n  "
+                        template: "\n  <section>\n    <create-listing (listAdded)=\"onListingAdded($event)\"></create-listing>\n  </section>\n  <section>\n    <h2>This are you listings</h2>\n    <ul>\n      <li \n        *ngFor=\"#listItem of listingItems\"\n        (click)=\"onSelect(listItem)\">\n        {{ listItem.name }}\n        {{ listItem.bedroom }}\n      </li>\n    </ul>\n  </section>\n  <section *ngIf=\"selectedListing != null\">\n    <edit-listing [listing]=\"selectedListing\"></edit-listing>\n  </section>\n  ",
+                        directives: [
+                            create_listing_component_1.CreateListingComponent,
+                            edit_listing_component_1.EditListingComponent
+                        ]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AccountListingsComponent);

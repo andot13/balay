@@ -2,29 +2,18 @@ import {Component, EventEmitter} from 'angular2/core';
 import {ListingItem} from '../listing-item';
 
 @Component({
-  selector: 'create-listing',
+  selector: 'edit-listing',
   template: `
-    <h2>Add listings</h2>
     <form action="">
       <label for="name">Name</label>
       <input type="text" [(ngModel)]="listing.name" id="name">
       <label for="name">Bedroom</label>
       <input type="text" [(ngModel)]="listing.bedroom" id="bedroom">
-      <button (click)="onClick()">Create listing</button>
+      <button (click)="onDelete()">Delete listing</button>
     </form>
   `,
-  outputs: ['listAdded']
+  inputs: ['listing']
 })
-export class CreateListingComponent{
-  listing = { 
-    name: '',
-    bedroom: 0
-  };
-
-  listAdded = new EventEmitter<ListingItem>();
-
-  onClick() {
-    this.listAdded.emit(this.listing);
-  }
-
+export class EditListingComponent {
+  listing = {name: '', bedroom: 0};
 }

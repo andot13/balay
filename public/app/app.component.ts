@@ -30,6 +30,6 @@ export class AppComponent implements OnInit{
   active:number = 0;
 
   ngOnInit() {
-    this.name = 'Andy';
+    console.log('On init');
   }
 }

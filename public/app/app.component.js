@@ -39,7 +39,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', './dashboa
                     this.active = 0;
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this.name = 'Andy';
+                    console.log('On init');
                 };
                 AppComponent = __decorate([
                     core_1.Component({
