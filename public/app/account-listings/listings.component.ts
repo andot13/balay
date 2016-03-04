@@ -21,7 +21,11 @@ import {ListingItem} from '../listing-item';
     </ul>
   </section>
   <section *ngIf="selectedListing != null">
-    <edit-listing [listing]="selectedListing"></edit-listing>
+    <edit-listing
+      [listing]="selectedListing"
+      (removed)="onRemove($event)"
+    >
+    </edit-listing>
   </section>
   `,
   directives: [
@@ -34,12 +38,17 @@ export class AccountListingsComponent{
   selectedListing: ListingItem;
   listing: ListingItem;
 
-  onListingAdded( listing: ListingItem) {
+  onListingAdded(listing) {
     this.listingItems.push({ name: listing.name, bedroom: listing.bedroom});
   }
 
-  onSelect(listing: ListingItem) {
+  onSelect(listing) {
     this.selectedListing = listing;
+  }
+
+  onRemove(listing){
+    this.listingItems.splice(this.listingItems.indexOf(listing), 1);
+    this.selectedListing = null;
   }
 
 }

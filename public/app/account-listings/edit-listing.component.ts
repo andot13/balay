@@ -12,8 +12,15 @@ import {ListingItem} from '../listing-item';
       <button (click)="onDelete()">Delete listing</button>
     </form>
   `,
-  inputs: ['listing']
+  inputs: ['listing'],
+  outputs: ['removed']
+
 })
 export class EditListingComponent {
   listing = {name: '', bedroom: 0};
+  removed = new EventEmitter<ListingItem>();
+
+  onDelete() {
+    this.removed.emit(this.listing);
+  }
 }

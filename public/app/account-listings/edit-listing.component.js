@@ -19,12 +19,17 @@ System.register(['angular2/core'], function(exports_1) {
             EditListingComponent = (function () {
                 function EditListingComponent() {
                     this.listing = { name: '', bedroom: 0 };
+                    this.removed = new core_1.EventEmitter();
                 }
+                EditListingComponent.prototype.onDelete = function () {
+                    this.removed.emit(this.listing);
+                };
                 EditListingComponent = __decorate([
                     core_1.Component({
                         selector: 'edit-listing',
                         template: "\n    <form action=\"\">\n      <label for=\"name\">Name</label>\n      <input type=\"text\" [(ngModel)]=\"listing.name\" id=\"name\">\n      <label for=\"name\">Bedroom</label>\n      <input type=\"text\" [(ngModel)]=\"listing.bedroom\" id=\"bedroom\">\n      <button (click)=\"onDelete()\">Delete listing</button>\n    </form>\n  ",
-                        inputs: ['listing']
+                        inputs: ['listing'],
+                        outputs: ['removed']
                     }), 
                     __metadata('design:paramtypes', [])
                 ], EditListingComponent);
