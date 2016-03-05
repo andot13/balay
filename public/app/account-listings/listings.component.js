@@ -1,4 +1,4 @@
-System.register(['angular2/core', './create-listing.component', './edit-listing.component'], function(exports_1) {
+System.register(['angular2/core', './create-listing.component', './edit-listing.component', '../like/like.component', '../services/listing.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', './create-listing.component', './edit-listing.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, create_listing_component_1, edit_listing_component_1;
+    var core_1, create_listing_component_1, edit_listing_component_1, like_component_1, listing_service_1;
     var AccountListingsComponent;
     return {
         setters:[
@@ -20,14 +20,25 @@ System.register(['angular2/core', './create-listing.component', './edit-listing.
             },
             function (edit_listing_component_1_1) {
                 edit_listing_component_1 = edit_listing_component_1_1;
+            },
+            function (like_component_1_1) {
+                like_component_1 = like_component_1_1;
+            },
+            function (listing_service_1_1) {
+                listing_service_1 = listing_service_1_1;
             }],
         execute: function() {
             AccountListingsComponent = (function () {
-                function AccountListingsComponent() {
+                function AccountListingsComponent(listingService) {
                     this.listingItems = new Array();
+                    this.listingItems = listingService.getListings();
                 }
                 AccountListingsComponent.prototype.onListingAdded = function (listing) {
-                    this.listingItems.push({ name: listing.name, bedroom: listing.bedroom });
+                    this.listingItems.push({
+                        name: listing.name,
+                        bedroom: listing.bedroom,
+                        likes: listing.likes
+                    });
                 };
                 AccountListingsComponent.prototype.onSelect = function (listing) {
                     this.selectedListing = listing;
@@ -39,13 +50,15 @@ System.register(['angular2/core', './create-listing.component', './edit-listing.
                 AccountListingsComponent = __decorate([
                     core_1.Component({
                         selector: 'account-listings',
-                        template: "\n  <section>\n    <create-listing (listAdded)=\"onListingAdded($event)\"></create-listing>\n  </section>\n  <section>\n    <h2>This are you listings</h2>\n    <ul>\n      <li \n        *ngFor=\"#listItem of listingItems\"\n        (click)=\"onSelect(listItem)\">\n        {{ listItem.name }}\n        {{ listItem.bedroom }}\n      </li>\n    </ul>\n  </section>\n  <section *ngIf=\"selectedListing != null\">\n    <edit-listing\n      [listing]=\"selectedListing\"\n      (removed)=\"onRemove($event)\"\n    >\n    </edit-listing>\n  </section>\n  ",
+                        template: "\n  <section>\n    <create-listing (listAdded)=\"onListingAdded($event)\"></create-listing>\n  </section>\n  <section>\n    <h2>This are you listings</h2>\n    <ul>\n      <li \n        *ngFor=\"#listItem of listingItems\"\n        (click)=\"onSelect(listItem)\">\n        {{ listItem.name }}\n        {{ listItem.bedroom }}\n        <like-component></like-component>\n      </li>\n    </ul>\n  </section>\n  <section *ngIf=\"selectedListing != null\">\n    <edit-listing\n      [listing]=\"selectedListing\"\n      (removed)=\"onRemove($event)\"\n    >\n    </edit-listing>\n  </section>\n  ",
                         directives: [
                             create_listing_component_1.CreateListingComponent,
-                            edit_listing_component_1.EditListingComponent
-                        ]
+                            edit_listing_component_1.EditListingComponent,
+                            like_component_1.LikeComponent
+                        ],
+                        providers: [listing_service_1.ListingService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [listing_service_1.ListingService])
                 ], AccountListingsComponent);
                 return AccountListingsComponent;
             })();

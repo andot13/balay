@@ -18,7 +18,11 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             EditListingComponent = (function () {
                 function EditListingComponent() {
-                    this.listing = { name: '', bedroom: 0 };
+                    this.listing = {
+                        name: '',
+                        bedroom: 0,
+                        likes: 0
+                    };
                     this.removed = new core_1.EventEmitter();
                 }
                 EditListingComponent.prototype.onDelete = function () {

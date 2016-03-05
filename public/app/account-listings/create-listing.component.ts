@@ -18,7 +18,8 @@ import {ListingItem} from '../listing-item';
 export class CreateListingComponent{
   listing = { 
     name: '',
-    bedroom: 0
+    bedroom: 0,
+    likes: 0
   };
 
   listAdded = new EventEmitter<ListingItem>();

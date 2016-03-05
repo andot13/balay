@@ -9,37 +9,33 @@ System.register(['angular2/core'], function(exports_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var CreateListingComponent;
+    var LikeComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            CreateListingComponent = (function () {
-                function CreateListingComponent() {
+            LikeComponent = (function () {
+                function LikeComponent() {
                     this.listing = {
                         name: '',
                         bedroom: 0,
                         likes: 0
                     };
-                    this.listAdded = new core_1.EventEmitter();
                 }
-                CreateListingComponent.prototype.onClick = function () {
-                    this.listAdded.emit(this.listing);
-                };
-                CreateListingComponent = __decorate([
+                LikeComponent = __decorate([
                     core_1.Component({
-                        selector: 'create-listing',
-                        template: "\n    <h2>Add listings</h2>\n    <form action=\"\">\n      <label for=\"name\">Name</label>\n      <input type=\"text\" [(ngModel)]=\"listing.name\" id=\"name\">\n      <label for=\"name\">Bedroom</label>\n      <input type=\"text\" [(ngModel)]=\"listing.bedroom\" id=\"bedroom\">\n      <button (click)=\"onClick()\">Create listing</button>\n    </form>\n  ",
-                        outputs: ['listAdded']
+                        selector: 'like-component',
+                        template: "\n    <span>{{ listing.likes }}Likes</span>\n  ",
+                        inputs: ['listing']
                     }), 
                     __metadata('design:paramtypes', [])
-                ], CreateListingComponent);
-                return CreateListingComponent;
+                ], LikeComponent);
+                return LikeComponent;
             })();
-            exports_1("CreateListingComponent", CreateListingComponent);
+            exports_1("LikeComponent", LikeComponent);
         }
     }
 });
-//# sourceMappingURL=create-listing.component.js.map
+//# sourceMappingURL=like.component.js.map

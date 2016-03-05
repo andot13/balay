@@ -17,7 +17,12 @@ import {ListingItem} from '../listing-item';
 
 })
 export class EditListingComponent {
-  listing = {name: '', bedroom: 0};
+  listing = {
+    name: '', 
+    bedroom: 0, 
+    likes: 0
+  };
+
   removed = new EventEmitter<ListingItem>();
 
   onDelete() {

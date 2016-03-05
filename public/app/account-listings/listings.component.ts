@@ -1,7 +1,11 @@
 import {Component} from 'angular2/core';
 import {CreateListingComponent} from './create-listing.component';
 import {EditListingComponent} from './edit-listing.component';
+import {LikeComponent} from '../like/like.component';
+
 import {ListingItem} from '../listing-item';
+
+import {ListingService} from '../services/listing.service';
 
 @Component({
   selector: 'account-listings',
@@ -17,6 +21,7 @@ import {ListingItem} from '../listing-item';
         (click)="onSelect(listItem)">
         {{ listItem.name }}
         {{ listItem.bedroom }}
+        <like-component></like-component>
       </li>
     </ul>
   </section>
@@ -30,16 +35,26 @@ import {ListingItem} from '../listing-item';
   `,
   directives: [
     CreateListingComponent, 
-    EditListingComponent
-  ]
+    EditListingComponent,
+    LikeComponent
+  ],
+  providers: [ListingService]
 })
 export class AccountListingsComponent{
   listingItems = new Array<ListingItem>();
   selectedListing: ListingItem;
   listing: ListingItem;
 
+  constructor(listingService: ListingService) {
+    this.listingItems = listingService.getListings();
+  }
+
   onListingAdded(listing) {
-    this.listingItems.push({ name: listing.name, bedroom: listing.bedroom});
+    this.listingItems.push({ 
+      name: listing.name, 
+      bedroom: listing.bedroom,
+      likes: listing.likes
+    });
   }
 
   onSelect(listing) {

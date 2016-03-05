@@ -1,4 +1,5 @@
 export interface ListingItem {
   name: string,
-  bedroom: number
+  bedroom: number,
+  likes: number
 }
