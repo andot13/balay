@@ -27,8 +27,7 @@ System.register(['angular2/core'], function(exports_1) {
                 LikeComponent = __decorate([
                     core_1.Component({
                         selector: 'like-component',
-                        template: "\n    <span>{{ listing.likes }}Likes</span>\n  ",
-                        inputs: ['listing']
+                        template: "\n    <span>{{ listing.likes }}Likes</span>\n  "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], LikeComponent);

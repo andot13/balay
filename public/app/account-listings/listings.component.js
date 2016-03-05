@@ -31,8 +31,18 @@ System.register(['angular2/core', './create-listing.component', './edit-listing.
             AccountListingsComponent = (function () {
                 function AccountListingsComponent(listingService) {
                     this.listingItems = new Array();
+                    this.viewMode = 'grid';
                     this.listingItems = listingService.getListings();
                 }
+                AccountListingsComponent.prototype.onViewMode = function (event) {
+                    event.preventDefault();
+                    if (this.viewMode === 'list') {
+                        this.viewMode = 'grid';
+                    }
+                    else if (this.viewMode === 'grid') {
+                        this.viewMode = 'list';
+                    }
+                };
                 AccountListingsComponent.prototype.onListingAdded = function (listing) {
                     this.listingItems.push({
                         name: listing.name,
@@ -50,7 +60,7 @@ System.register(['angular2/core', './create-listing.component', './edit-listing.
                 AccountListingsComponent = __decorate([
                     core_1.Component({
                         selector: 'account-listings',
-                        template: "\n  <section>\n    <create-listing (listAdded)=\"onListingAdded($event)\"></create-listing>\n  </section>\n  <section>\n    <h2>This are you listings</h2>\n    <ul>\n      <li \n        *ngFor=\"#listItem of listingItems\"\n        (click)=\"onSelect(listItem)\">\n        {{ listItem.name }}\n        {{ listItem.bedroom }}\n        <like-component></like-component>\n      </li>\n    </ul>\n  </section>\n  <section *ngIf=\"selectedListing != null\">\n    <edit-listing\n      [listing]=\"selectedListing\"\n      (removed)=\"onRemove($event)\"\n    >\n    </edit-listing>\n  </section>\n  ",
+                        template: "\n  <section>\n    <create-listing (listAdded)=\"onListingAdded($event)\"></create-listing>\n  </section>\n  <section>\n    <ul class=\"nav nav-pills\">\n      <li [class.active]=\"viewMode == 'list'\">\n        <a (click)=\"onViewMode($event)\" href=\"\">List</a>\n      </li>\n      <li [class.active]=\"viewMode == 'grid'\">\n        <a (click)=\"onViewMode($event)\" href=\"\">Grid</a>\n      </li>\n    </ul>\n  </section>\n  <section [ngSwitch]=\"viewMode\">\n    <template [ngSwitchWhen]=\"'list'\" ngSwitchDefault>\n      <h2>This are you listings</h2>\n      <ul>\n        <li \n          *ngFor=\"#listItem of listingItems\"\n          (click)=\"onSelect(listItem)\">\n          {{ listItem.name }}\n          {{ listItem.bedroom }}\n          <like-component></like-component>\n        </li>\n      </ul>\n    </template>\n\n    <template [ngSwitchWhen]=\"'grid'\">\n      <h2>This are you listings</h2>\n      <div class=\"card col-sm-3\" *ngFor=\"#listItem of listingItems\"\n          (click)=\"onSelect(listItem)\">\n          {{ listItem.name }}\n          {{ listItem.bedroom }}\n          <like-component></like-component>\n      </div>\n    </template>\n  </section>\n\n  <section *ngIf=\"selectedListing != null\">\n    <edit-listing\n      [listing]=\"selectedListing\"\n      (removed)=\"onRemove($event)\"\n    >\n    </edit-listing>\n  </section>\n  ",
                         directives: [
                             create_listing_component_1.CreateListingComponent,
                             edit_listing_component_1.EditListingComponent,

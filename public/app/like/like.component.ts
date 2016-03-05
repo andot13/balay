@@ -5,8 +5,7 @@ import {ListingItem} from '../listing-item';
   selector: 'like-component',
   template: `
     <span>{{ listing.likes }}Likes</span>
-  `,
-  inputs['listing']
+  `
 })
 export class LikeComponent{ 
   listing = {

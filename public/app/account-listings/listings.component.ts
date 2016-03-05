@@ -14,17 +14,40 @@ import {ListingService} from '../services/listing.service';
     <create-listing (listAdded)="onListingAdded($event)"></create-listing>
   </section>
   <section>
-    <h2>This are you listings</h2>
-    <ul>
-      <li 
-        *ngFor="#listItem of listingItems"
-        (click)="onSelect(listItem)">
-        {{ listItem.name }}
-        {{ listItem.bedroom }}
-        <like-component></like-component>
+    <ul class="nav nav-pills">
+      <li [class.active]="viewMode == 'list'">
+        <a (click)="onViewMode($event)" href="">List</a>
+      </li>
+      <li [class.active]="viewMode == 'grid'">
+        <a (click)="onViewMode($event)" href="">Grid</a>
       </li>
     </ul>
   </section>
+  <section [ngSwitch]="viewMode">
+    <template [ngSwitchWhen]="'list'" ngSwitchDefault>
+      <h2>This are you listings</h2>
+      <ul>
+        <li 
+          *ngFor="#listItem of listingItems"
+          (click)="onSelect(listItem)">
+          {{ listItem.name }}
+          {{ listItem.bedroom }}
+          <like-component></like-component>
+        </li>
+      </ul>
+    </template>
+
+    <template [ngSwitchWhen]="'grid'">
+      <h2>This are you listings</h2>
+      <div class="card col-sm-3" *ngFor="#listItem of listingItems"
+          (click)="onSelect(listItem)">
+          {{ listItem.name }}
+          {{ listItem.bedroom }}
+          <like-component></like-component>
+      </div>
+    </template>
+  </section>
+
   <section *ngIf="selectedListing != null">
     <edit-listing
       [listing]="selectedListing"
@@ -44,9 +67,20 @@ export class AccountListingsComponent{
   listingItems = new Array<ListingItem>();
   selectedListing: ListingItem;
   listing: ListingItem;
+  viewMode: 'grid';
 
   constructor(listingService: ListingService) {
     this.listingItems = listingService.getListings();
+  }
+
+  onViewMode(event){
+    event.preventDefault();
+
+    if(this.viewMode === 'list') {
+      this.viewMode = 'grid';
+    }else if (this.viewMode === 'grid'){
+      this.viewMode = 'list';
+    }
   }
 
   onListingAdded(listing) {
